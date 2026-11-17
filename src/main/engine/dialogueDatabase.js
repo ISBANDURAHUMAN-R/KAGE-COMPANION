@@ -77,8 +77,15 @@ const KAGE_DIALOGUES = {
 
 const KAGE_CHAN_DIALOGUES = {
   idle: [
+    { key: 'kc_idle_master', text: "Hey! Master~ ♡", mood: 'happy', anim: 'happy' },
+    { key: 'kc_idle_doing', text: "What are you doing? Let me watch!", mood: 'curious', anim: 'curious' },
+    { key: 'kc_idle_game', text: "Let's play a game?", mood: 'excited', anim: 'excited' },
+    { key: 'kc_idle_hard', text: "You really work hard... take a break, okay?", mood: 'happy', anim: 'sitting' },
+    { key: 'kc_idle_ignore_me', text: "Don't ignore me! >.<", mood: 'angry', anim: 'angry' },
+    { key: 'kc_idle_always', text: "I'm always here for you ♡", mood: 'happy', anim: 'happy' },
+    { key: 'kc_idle_motto', text: "A little chaos, with a lot of love. ♡", mood: 'teasing', anim: 'teasing' },
     { key: 'kc_idle_wb', text: "Welcome back! I was waiting for you~", mood: 'happy', anim: 'happy' },
-    { key: 'kc_idle_work', text: "What are you working on today? Let me watch!", mood: 'curious', anim: 'curious' },
+    { key: 'kc_idle_work', text: "What are you working on today?", mood: 'curious', anim: 'curious' },
     { key: 'kc_idle_company', text: "Need some company while you work? I'm right here.", mood: 'idle', anim: 'idle' },
     { key: 'kc_idle_break', text: "Take a little break, okay? Hydrate yourself!", mood: 'happy', anim: 'talking' },
     { key: 'kc_idle_forgot', text: "Hmph! You forgot about me, didn't you?", mood: 'angry', anim: 'teasing' },

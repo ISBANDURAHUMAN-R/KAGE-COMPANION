@@ -87,9 +87,14 @@ async function runTests() {
   const trayIcon = path.join(__dirname, '../src/renderer/assets/icons/tray-icon.png');
   const appIco = path.join(__dirname, '../src/renderer/assets/icons/icon.ico');
   const wasmFile = path.join(__dirname, '../src/renderer/assets/sql-wasm.wasm');
+  const kageAsset = path.join(__dirname, '../src/renderer/characters/kage/assets/kage-main.png');
+  const chanAsset = path.join(__dirname, '../src/renderer/characters/kage-chan/assets/kage-chan-main.png');
+
   assert(fs.existsSync(trayIcon), 'tray-icon.png must exist');
   assert(fs.existsSync(appIco), 'icon.ico must exist');
   assert(fs.existsSync(wasmFile), 'sql-wasm.wasm must exist');
+  assert(fs.existsSync(kageAsset), 'kage-main.png character asset must exist');
+  assert(fs.existsSync(chanAsset), 'kage-chan-main.png character asset must exist');
   console.log('  -> Asset Verification PASS');
 
   // Cleanup

@@ -9,7 +9,7 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder --win",
     "dist:portable": "electron-builder --win portable",
-    "test": "node test/test-db.js"
+    "test": "node test/test-all.js"
   },
   "keywords": [
     "desktop-pet",

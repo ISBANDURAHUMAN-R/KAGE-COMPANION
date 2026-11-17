@@ -42,18 +42,18 @@ body, html {
 /* Shadow Aura */
 .kage-aura {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 26, 43, 0.25) 0%, rgba(10, 10, 15, 0.6) 50%, transparent 75%);
-  filter: blur(10px);
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.28) 0%, rgba(10, 10, 15, 0.6) 50%, transparent 75%);
+  filter: blur(12px);
   z-index: 1;
   animation: auraPulse 3.5s ease-in-out infinite alternate;
 }
 
 @keyframes auraPulse {
   0% { transform: scale(0.9); opacity: 0.4; }
-  100% { transform: scale(1.15); opacity: 0.8; }
+  100% { transform: scale(1.15); opacity: 0.85; }
 }
 
 /* Particles */
@@ -93,72 +93,40 @@ body, html {
   100% { transform: translateY(-40px) scale(0.2); opacity: 0; }
 }
 
-/* SVG Elements */
-.kage-svg {
+/* Sprite Wrapper & Images */
+.kage-sprite-wrapper {
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Natural Idle Motion */
-.kage-container.state-idle .kage-svg {
+.kage-sprite {
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.9));
+  transition: transform 0.2s ease;
+}
+
+/* ------------------- STATE ANIMATIONS ------------------- */
+
+/* Idle */
+.kage-container.state-idle .kage-sprite-wrapper {
   animation: idleBob 3s ease-in-out infinite alternate;
 }
 
 @keyframes idleBob {
   0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-7px) rotate(1.5deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
   100% { transform: translateY(2px) rotate(-1.5deg); }
 }
 
-/* Tail Swish */
-.kage-tail {
-  transform-origin: 135px 165px;
-  animation: tailWiggle 2.8s ease-in-out infinite alternate;
-}
-
-@keyframes tailWiggle {
-  0% { transform: rotate(-8deg); }
-  100% { transform: rotate(18deg); }
-}
-
-/* Horn Twitch */
-.horn-l {
-  transform-origin: 75px 80px;
-  animation: hornTwitchL 4s ease-in-out infinite;
-}
-.horn-r {
-  transform-origin: 125px 80px;
-  animation: hornTwitchR 4s ease-in-out infinite 0.3s;
-}
-
-@keyframes hornTwitchL {
-  0%, 85%, 100% { transform: rotate(0deg); }
-  90% { transform: rotate(-6deg); }
-  95% { transform: rotate(4deg); }
-}
-
-@keyframes hornTwitchR {
-  0%, 85%, 100% { transform: rotate(0deg); }
-  90% { transform: rotate(6deg); }
-  95% { transform: rotate(-4deg); }
-}
-
-/* Eye Blinking */
-.eye-group {
-  transform-origin: 50% 50%;
-  animation: blinkEyes 4.5s infinite;
-}
-
-@keyframes blinkEyes {
-  0%, 94%, 98%, 100% { transform: scaleY(1); }
-  96% { transform: scaleY(0.08); }
-}
-
-/* ------------------- STATES ------------------- */
-
 /* Happy */
-.kage-container.state-happy .kage-svg {
+.kage-container.state-happy .kage-sprite-wrapper {
   animation: happyBounce 0.6s ease-in-out infinite alternate;
 }
 @keyframes happyBounce {
@@ -167,31 +135,29 @@ body, html {
 }
 
 /* Sad */
-.kage-container.state-sad .kage-svg {
+.kage-container.state-sad .kage-sprite-wrapper {
   animation: sadDroop 3s ease-in-out infinite alternate;
 }
 @keyframes sadDroop {
-  0% { transform: translateY(4px) scale(1.02, 0.95); }
-  100% { transform: translateY(8px) scale(1.04, 0.92); }
+  0% { transform: translateY(2px); }
+  100% { transform: translateY(6px); }
 }
-.kage-container.state-sad .horn-l { transform: rotate(12deg); }
-.kage-container.state-sad .horn-r { transform: rotate(-12deg); }
 
 /* Curious */
-.kage-container.state-curious .kage-svg {
+.kage-container.state-curious .kage-sprite-wrapper {
   animation: curiousTilt 2s ease-in-out infinite alternate;
 }
 @keyframes curiousTilt {
-  0% { transform: rotate(-10deg) translateY(-4px); }
-  100% { transform: rotate(-14deg) translateY(-6px); }
+  0% { transform: rotate(-8deg) translateY(-3px); }
+  100% { transform: rotate(-12deg) translateY(-5px); }
 }
 
 /* Angry */
-.kage-container.state-angry .kage-svg {
+.kage-container.state-angry .kage-sprite-wrapper {
   animation: angryVibrate 0.12s linear infinite alternate;
 }
 .kage-container.state-angry .kage-aura {
-  background: radial-gradient(circle, rgba(255, 26, 43, 0.6) 0%, rgba(180, 0, 20, 0.5) 60%, transparent 80%);
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.65) 0%, rgba(180, 0, 20, 0.5) 60%, transparent 80%);
 }
 @keyframes angryVibrate {
   0% { transform: translate(-2px, -1px); }
@@ -199,72 +165,72 @@ body, html {
 }
 
 /* Sleepy */
-.kage-container.state-sleepy .kage-svg {
+.kage-container.state-sleepy .kage-sprite-wrapper {
   animation: sleepySway 3.5s ease-in-out infinite alternate;
 }
 @keyframes sleepySway {
   0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(6px) rotate(6deg); }
+  100% { transform: translateY(5px) rotate(4deg); }
 }
 
 /* Sleeping */
-.kage-container.state-sleeping .kage-svg {
+.kage-container.state-sleeping .kage-sprite-wrapper {
   animation: sleepPuddle 2.8s ease-in-out infinite alternate;
 }
 @keyframes sleepPuddle {
-  0% { transform: translateY(14px) scale(1.15, 0.85); }
-  100% { transform: translateY(16px) scale(1.2, 0.8); }
+  0% { transform: translateY(8px) scale(1.04, 0.96); }
+  100% { transform: translateY(10px) scale(1.06, 0.94); }
 }
 
 /* Surprised */
-.kage-container.state-surprised .kage-svg {
+.kage-container.state-surprised .kage-sprite-wrapper {
   animation: surpriseJump 0.4s ease-out 1 forwards;
 }
 @keyframes surpriseJump {
   0% { transform: translateY(0); }
-  40% { transform: translateY(-22px) scale(0.9, 1.15); }
-  100% { transform: translateY(-8px) scale(1, 1); }
+  40% { transform: translateY(-20px) scale(0.9, 1.15); }
+  100% { transform: translateY(-6px) scale(1, 1); }
 }
 
 /* Excited */
-.kage-container.state-excited .kage-svg {
+.kage-container.state-excited .kage-sprite-wrapper {
   animation: excitedSpin 0.8s ease-in-out infinite alternate;
 }
 @keyframes excitedSpin {
-  0% { transform: translateY(-4px) rotate(-6deg) scale(1.05); }
-  100% { transform: translateY(-18px) rotate(6deg) scale(1.05); }
+  0% { transform: translateY(-4px) rotate(-5deg); }
+  100% { transform: translateY(-16px) rotate(5deg); }
 }
 
 /* Walking */
-.kage-container.state-walking .kage-svg {
+.kage-container.state-walking .kage-sprite-wrapper {
   animation: walkWaddle 0.7s ease-in-out infinite alternate;
 }
 @keyframes walkWaddle {
-  0% { transform: translateX(-15px) rotate(-5deg); }
-  100% { transform: translateX(15px) rotate(5deg); }
+  0% { transform: translateX(-14px) rotate(-4deg); }
+  100% { transform: translateX(14px) rotate(4deg); }
 }
 
 /* Sitting */
-.kage-container.state-sitting .kage-svg {
-  transform: translateY(10px) scale(1.08, 0.92);
+.kage-container.state-sitting .kage-sprite-wrapper {
+  transform: translateY(6px);
 }
 
 /* Talking */
-.kage-container.state-talking .kage-mouth {
-  animation: talkMouth 0.25s infinite alternate;
+.kage-container.state-talking .kage-sprite-wrapper {
+  animation: talkBob 0.25s infinite alternate;
 }
-@keyframes talkMouth {
-  0% { transform: scaleY(0.7); }
-  100% { transform: scaleY(1.3); }
+@keyframes talkBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
 }
 
 /* Teasing */
-.kage-container.state-teasing .kage-svg {
+.kage-container.state-teasing .kage-sprite-wrapper {
   animation: teaseWiggle 1.5s ease-in-out infinite alternate;
 }
 @keyframes teaseWiggle {
   0% { transform: rotate(-5deg) translateY(-2px); }
-  100% { transform: rotate(8deg) translateY(-8px); }
+  100% { transform: rotate(7deg) translateY(-7px); }
 }
 
 /* Emote Bubble */
@@ -383,7 +349,6 @@ body, html {
   box-shadow: 0 0 16px rgba(255, 26, 43, 0.8);
 }
 
-/* Circular item placement */
 .menu-talk     { top: 5px;   left: 90px; }
 .menu-pet      { top: 35px;  right: 15px; }
 .menu-play     { bottom: 45px; right: 15px; }

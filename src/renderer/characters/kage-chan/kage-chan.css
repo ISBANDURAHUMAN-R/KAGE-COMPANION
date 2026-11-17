@@ -26,7 +26,7 @@ body, html {
 /* Character Container */
 .kage-chan-container {
   position: relative;
-  width: 175px;
+  width: 180px;
   height: 200px;
   cursor: grab;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -39,24 +39,24 @@ body, html {
   cursor: grabbing;
 }
 
-/* Aura Glow */
+/* Crimson Shadow Aura */
 .kc-aura {
   position: absolute;
-  width: 155px;
-  height: 170px;
+  width: 160px;
+  height: 175px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 26, 43, 0.22) 0%, rgba(30, 10, 20, 0.5) 60%, transparent 80%);
-  filter: blur(12px);
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.24) 0%, rgba(30, 8, 16, 0.5) 60%, transparent 80%);
+  filter: blur(14px);
   z-index: 1;
   animation: kcAuraPulse 4s ease-in-out infinite alternate;
 }
 
 @keyframes kcAuraPulse {
   0% { transform: scale(0.92); opacity: 0.35; }
-  100% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 0.75; }
 }
 
-/* Floating Red Petals/Sparkles */
+/* Floating Red Sparkles */
 .kc-particle {
   position: absolute;
   width: 5px;
@@ -70,14 +70,14 @@ body, html {
 }
 
 .p1 {
-  top: 35%;
-  left: 18%;
+  top: 30%;
+  left: 15%;
   animation: kcFloat 3.5s infinite ease-out;
 }
 
 .p2 {
-  top: 45%;
-  right: 18%;
+  top: 40%;
+  right: 15%;
   animation: kcFloat 2.8s infinite ease-out 1.2s;
 }
 
@@ -93,60 +93,40 @@ body, html {
   100% { transform: translateY(-35px) rotate(180deg); opacity: 0; }
 }
 
-/* SVG Elements */
-.kc-svg {
+/* Sprite Wrapper & Images */
+.kc-sprite-wrapper {
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.75));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Hair Physics Swaying */
-.kc-hair-back {
-  transform-origin: 110px 80px;
-  animation: hairSway 3.8s ease-in-out infinite alternate;
+.kc-sprite {
+  max-width: 170px;
+  max-height: 185px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.85));
+  transition: transform 0.2s ease;
 }
 
-@keyframes hairSway {
-  0% { transform: rotate(-2.5deg); }
-  100% { transform: rotate(2.5deg); }
-}
+/* ------------------- STATE ANIMATIONS ------------------- */
 
-/* Hair Clips Bounce */
-.kc-clip-l, .kc-clip-r {
-  animation: clipBounce 3s ease-in-out infinite alternate;
-}
-
-@keyframes clipBounce {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
-/* Natural Idle Motion */
-.kage-chan-container.state-idle .kc-svg {
+/* Idle */
+.kage-chan-container.state-idle .kc-sprite-wrapper {
   animation: kcIdleBob 3.2s ease-in-out infinite alternate;
 }
 
 @keyframes kcIdleBob {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(1px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(2px); }
 }
-
-/* Eye Blinking */
-.kc-eyes {
-  transform-origin: 110px 98px;
-  animation: kcBlinkEyes 4.8s infinite;
-}
-
-@keyframes kcBlinkEyes {
-  0%, 93%, 97%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.06); }
-}
-
-/* ------------------- STATES ------------------- */
 
 /* Happy */
-.kage-chan-container.state-happy .kc-svg {
+.kage-chan-container.state-happy .kc-sprite-wrapper {
   animation: kcHappyBounce 0.65s ease-in-out infinite alternate;
 }
 @keyframes kcHappyBounce {
@@ -154,53 +134,56 @@ body, html {
   100% { transform: translateY(-14px) scale(0.98, 1.03); }
 }
 
-/* Sad */
-.kage-chan-container.state-sad .kc-svg {
+/* Sad / Blushing */
+.kage-chan-container.state-sad .kc-sprite-wrapper {
   animation: kcSadDroop 3.2s ease-in-out infinite alternate;
 }
 @keyframes kcSadDroop {
-  0% { transform: translateY(3px) rotate(0deg); }
-  100% { transform: translateY(7px) rotate(1.5deg); }
+  0% { transform: translateY(2px); }
+  100% { transform: translateY(6px); }
 }
 
 /* Curious */
-.kage-chan-container.state-curious .kc-svg {
+.kage-chan-container.state-curious .kc-sprite-wrapper {
   animation: kcCuriousTilt 2.2s ease-in-out infinite alternate;
 }
 @keyframes kcCuriousTilt {
-  0% { transform: rotate(-7deg) translateY(-3px); }
-  100% { transform: rotate(-11deg) translateY(-5px); }
+  0% { transform: rotate(-5deg) translateY(-2px); }
+  100% { transform: rotate(-8deg) translateY(-5px); }
 }
 
-/* Angry (Tsundere Pout) */
-.kage-chan-container.state-angry .kc-svg {
-  animation: kcAngryPout 0.8s ease-in-out infinite alternate;
+/* Angry */
+.kage-chan-container.state-angry .kc-sprite-wrapper {
+  animation: kcAngryShake 0.15s linear infinite alternate;
 }
-@keyframes kcAngryPout {
-  0% { transform: translateY(0) rotate(-2deg); }
-  100% { transform: translateY(2px) rotate(2deg); }
+.kage-chan-container.state-angry .kc-aura {
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.65) 0%, rgba(60, 10, 20, 0.7) 65%, transparent 85%);
+}
+@keyframes kcAngryShake {
+  0% { transform: translate(-2px, -1px); }
+  100% { transform: translate(2px, 1px); }
 }
 
 /* Sleepy */
-.kage-chan-container.state-sleepy .kc-svg {
+.kage-chan-container.state-sleepy .kc-sprite-wrapper {
   animation: kcSleepySway 3.6s ease-in-out infinite alternate;
 }
 @keyframes kcSleepySway {
   0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(5px) rotate(4deg); }
+  100% { transform: translateY(5px) rotate(3deg); }
 }
 
 /* Sleeping */
-.kage-chan-container.state-sleeping .kc-svg {
+.kage-chan-container.state-sleeping .kc-sprite-wrapper {
   animation: kcSleeping 3s ease-in-out infinite alternate;
 }
 @keyframes kcSleeping {
-  0% { transform: translateY(10px) scale(1.04, 0.96); }
-  100% { transform: translateY(12px) scale(1.06, 0.94); }
+  0% { transform: translateY(8px) scale(1.03, 0.97); }
+  100% { transform: translateY(10px) scale(1.05, 0.95); }
 }
 
 /* Surprised */
-.kage-chan-container.state-surprised .kc-svg {
+.kage-chan-container.state-surprised .kc-sprite-wrapper {
   animation: kcSurpriseJump 0.4s ease-out 1 forwards;
 }
 @keyframes kcSurpriseJump {
@@ -210,16 +193,16 @@ body, html {
 }
 
 /* Excited */
-.kage-chan-container.state-excited .kc-svg {
+.kage-chan-container.state-excited .kc-sprite-wrapper {
   animation: kcExcitedTwirl 0.8s ease-in-out infinite alternate;
 }
 @keyframes kcExcitedTwirl {
-  0% { transform: translateY(-4px) rotate(-5deg); }
-  100% { transform: translateY(-16px) rotate(5deg); }
+  0% { transform: translateY(-4px) rotate(-4deg); }
+  100% { transform: translateY(-16px) rotate(4deg); }
 }
 
 /* Walking */
-.kage-chan-container.state-walking .kc-svg {
+.kage-chan-container.state-walking .kc-sprite-wrapper {
   animation: kcWalkWaddle 0.65s ease-in-out infinite alternate;
 }
 @keyframes kcWalkWaddle {
@@ -228,26 +211,26 @@ body, html {
 }
 
 /* Sitting */
-.kage-chan-container.state-sitting .kc-svg {
-  transform: translateY(8px) scale(1.05, 0.95);
+.kage-chan-container.state-sitting .kc-sprite-wrapper {
+  transform: translateY(6px);
 }
 
 /* Talking */
-.kage-chan-container.state-talking .kc-mouth {
-  animation: kcTalkMouth 0.22s infinite alternate;
+.kage-chan-container.state-talking .kc-sprite-wrapper {
+  animation: kcTalkBob 0.3s ease-in-out infinite alternate;
 }
-@keyframes kcTalkMouth {
-  0% { transform: scaleY(0.7); }
-  100% { transform: scaleY(1.3); }
+@keyframes kcTalkBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
 }
 
 /* Teasing */
-.kage-chan-container.state-teasing .kc-svg {
+.kage-chan-container.state-teasing .kc-sprite-wrapper {
   animation: kcTeaseWiggle 1.6s ease-in-out infinite alternate;
 }
 @keyframes kcTeaseWiggle {
   0% { transform: rotate(-4deg) translateY(-2px); }
-  100% { transform: rotate(6deg) translateY(-6px); }
+  100% { transform: rotate(5deg) translateY(-6px); }
 }
 
 /* Emote Bubble */
