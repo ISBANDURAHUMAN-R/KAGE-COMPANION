@@ -1,0 +1,412 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#companion-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Character Container */
+.kage-container {
+  position: relative;
+  width: 170px;
+  height: 185px;
+  cursor: grab;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kage-container:active {
+  cursor: grabbing;
+}
+
+/* Shadow Aura */
+.kage-aura {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.25) 0%, rgba(10, 10, 15, 0.6) 50%, transparent 75%);
+  filter: blur(10px);
+  z-index: 1;
+  animation: auraPulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes auraPulse {
+  0% { transform: scale(0.9); opacity: 0.4; }
+  100% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* Particles */
+.kage-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff1a2b;
+  box-shadow: 0 0 8px #ff1a2b;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.p1 {
+  top: 40%;
+  left: 20%;
+  animation: floatParticle 3s infinite ease-out;
+}
+
+.p2 {
+  top: 50%;
+  right: 20%;
+  animation: floatParticle 2.5s infinite ease-out 1s;
+}
+
+.p3 {
+  bottom: 30%;
+  left: 45%;
+  animation: floatParticle 3.2s infinite ease-out 1.8s;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-40px) scale(0.2); opacity: 0; }
+}
+
+/* SVG Elements */
+.kage-svg {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
+}
+
+/* Natural Idle Motion */
+.kage-container.state-idle .kage-svg {
+  animation: idleBob 3s ease-in-out infinite alternate;
+}
+
+@keyframes idleBob {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(1.5deg); }
+  100% { transform: translateY(2px) rotate(-1.5deg); }
+}
+
+/* Tail Swish */
+.kage-tail {
+  transform-origin: 135px 165px;
+  animation: tailWiggle 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes tailWiggle {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(18deg); }
+}
+
+/* Horn Twitch */
+.horn-l {
+  transform-origin: 75px 80px;
+  animation: hornTwitchL 4s ease-in-out infinite;
+}
+.horn-r {
+  transform-origin: 125px 80px;
+  animation: hornTwitchR 4s ease-in-out infinite 0.3s;
+}
+
+@keyframes hornTwitchL {
+  0%, 85%, 100% { transform: rotate(0deg); }
+  90% { transform: rotate(-6deg); }
+  95% { transform: rotate(4deg); }
+}
+
+@keyframes hornTwitchR {
+  0%, 85%, 100% { transform: rotate(0deg); }
+  90% { transform: rotate(6deg); }
+  95% { transform: rotate(-4deg); }
+}
+
+/* Eye Blinking */
+.eye-group {
+  transform-origin: 50% 50%;
+  animation: blinkEyes 4.5s infinite;
+}
+
+@keyframes blinkEyes {
+  0%, 94%, 98%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.08); }
+}
+
+/* ------------------- STATES ------------------- */
+
+/* Happy */
+.kage-container.state-happy .kage-svg {
+  animation: happyBounce 0.6s ease-in-out infinite alternate;
+}
+@keyframes happyBounce {
+  0% { transform: translateY(2px) scale(1, 0.96); }
+  100% { transform: translateY(-16px) scale(0.96, 1.05); }
+}
+
+/* Sad */
+.kage-container.state-sad .kage-svg {
+  animation: sadDroop 3s ease-in-out infinite alternate;
+}
+@keyframes sadDroop {
+  0% { transform: translateY(4px) scale(1.02, 0.95); }
+  100% { transform: translateY(8px) scale(1.04, 0.92); }
+}
+.kage-container.state-sad .horn-l { transform: rotate(12deg); }
+.kage-container.state-sad .horn-r { transform: rotate(-12deg); }
+
+/* Curious */
+.kage-container.state-curious .kage-svg {
+  animation: curiousTilt 2s ease-in-out infinite alternate;
+}
+@keyframes curiousTilt {
+  0% { transform: rotate(-10deg) translateY(-4px); }
+  100% { transform: rotate(-14deg) translateY(-6px); }
+}
+
+/* Angry */
+.kage-container.state-angry .kage-svg {
+  animation: angryVibrate 0.12s linear infinite alternate;
+}
+.kage-container.state-angry .kage-aura {
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.6) 0%, rgba(180, 0, 20, 0.5) 60%, transparent 80%);
+}
+@keyframes angryVibrate {
+  0% { transform: translate(-2px, -1px); }
+  100% { transform: translate(2px, 1px); }
+}
+
+/* Sleepy */
+.kage-container.state-sleepy .kage-svg {
+  animation: sleepySway 3.5s ease-in-out infinite alternate;
+}
+@keyframes sleepySway {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(6px) rotate(6deg); }
+}
+
+/* Sleeping */
+.kage-container.state-sleeping .kage-svg {
+  animation: sleepPuddle 2.8s ease-in-out infinite alternate;
+}
+@keyframes sleepPuddle {
+  0% { transform: translateY(14px) scale(1.15, 0.85); }
+  100% { transform: translateY(16px) scale(1.2, 0.8); }
+}
+
+/* Surprised */
+.kage-container.state-surprised .kage-svg {
+  animation: surpriseJump 0.4s ease-out 1 forwards;
+}
+@keyframes surpriseJump {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-22px) scale(0.9, 1.15); }
+  100% { transform: translateY(-8px) scale(1, 1); }
+}
+
+/* Excited */
+.kage-container.state-excited .kage-svg {
+  animation: excitedSpin 0.8s ease-in-out infinite alternate;
+}
+@keyframes excitedSpin {
+  0% { transform: translateY(-4px) rotate(-6deg) scale(1.05); }
+  100% { transform: translateY(-18px) rotate(6deg) scale(1.05); }
+}
+
+/* Walking */
+.kage-container.state-walking .kage-svg {
+  animation: walkWaddle 0.7s ease-in-out infinite alternate;
+}
+@keyframes walkWaddle {
+  0% { transform: translateX(-15px) rotate(-5deg); }
+  100% { transform: translateX(15px) rotate(5deg); }
+}
+
+/* Sitting */
+.kage-container.state-sitting .kage-svg {
+  transform: translateY(10px) scale(1.08, 0.92);
+}
+
+/* Talking */
+.kage-container.state-talking .kage-mouth {
+  animation: talkMouth 0.25s infinite alternate;
+}
+@keyframes talkMouth {
+  0% { transform: scaleY(0.7); }
+  100% { transform: scaleY(1.3); }
+}
+
+/* Teasing */
+.kage-container.state-teasing .kage-svg {
+  animation: teaseWiggle 1.5s ease-in-out infinite alternate;
+}
+@keyframes teaseWiggle {
+  0% { transform: rotate(-5deg) translateY(-2px); }
+  100% { transform: rotate(8deg) translateY(-8px); }
+}
+
+/* Emote Bubble */
+.kage-emote {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff1a2b;
+  text-shadow: 0 0 10px rgba(255, 26, 43, 0.8), 0 2px 4px #000;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.5) translateY(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.kage-emote.show-heart,
+.kage-emote.show-tear,
+.kage-emote.show-question,
+.kage-emote.show-angry,
+.kage-emote.show-zzz,
+.kage-emote.show-exclamation,
+.kage-emote.show-star {
+  opacity: 1;
+  transform: scale(1.1) translateY(0);
+}
+
+/* Speech Balloon */
+.kage-speech-balloon {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: rgba(12, 12, 16, 0.96);
+  border: 1.5px solid #ff1a2b;
+  color: #f5f5fa;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  max-width: 220px;
+  min-width: 140px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85), 0 0 12px rgba(255, 26, 43, 0.3);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.kage-speech-balloon.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-18px);
+}
+
+.kage-speech-balloon::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px;
+  border-style: solid;
+  border-color: #ff1a2b transparent transparent transparent;
+}
+
+/* Interaction Menu */
+.kage-interaction-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+}
+
+.kage-interaction-menu.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.menu-item {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #111118;
+  border: 1.5px solid #ff1a2b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 26, 43, 0.4);
+  transition: all 0.18s ease;
+}
+
+.menu-item:hover {
+  background: #ff1a2b;
+  color: #fff;
+  transform: scale(1.22);
+  box-shadow: 0 0 16px rgba(255, 26, 43, 0.8);
+}
+
+/* Circular item placement */
+.menu-talk     { top: 5px;   left: 90px; }
+.menu-pet      { top: 35px;  right: 15px; }
+.menu-play     { bottom: 45px; right: 15px; }
+.menu-question { bottom: 5px; left: 90px; }
+.menu-sleep    { bottom: 45px; left: 15px; }
+.menu-settings { top: 35px;  left: 15px; }
+.menu-close    { top: 90px;  left: 90px; background: #2a080c; border-color: #661118; font-size: 13px; }
+.menu-close:hover { background: #e50914; }
+
+.menu-tooltip {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #ff4d5a;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 26, 43, 0.3);
+  pointer-events: none;
+  white-space: nowrap;
+}

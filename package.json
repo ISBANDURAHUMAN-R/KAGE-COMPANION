@@ -1,0 +1,75 @@
+{
+  "name": "voidkage-companions",
+  "productName": "VOIDKAGE",
+  "version": "1.0.0",
+  "description": "VOIDKAGE Desktop Companions — KAGE & KAGE-CHAN Interactive Windows Desktop Pets",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable",
+    "test": "node test/test-db.js"
+  },
+  "keywords": [
+    "desktop-pet",
+    "companion",
+    "voidkage",
+    "chibi",
+    "electron",
+    "windows"
+  ],
+  "author": "VOIDKAGE Team",
+  "license": "MIT",
+  "type": "commonjs",
+  "build": {
+    "appId": "com.voidkage.companions",
+    "productName": "VOIDKAGE",
+    "copyright": "Copyright © 2026 VOIDKAGE",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "src/renderer/assets/icons/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "VOIDKAGE",
+      "uninstallDisplayName": "VOIDKAGE Desktop Companions",
+      "runAfterFinish": true,
+      "artifactName": "VOIDKAGE-Setup-${version}.${ext}"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ]
+  },
+  "dependencies": {
+    "sql.js": "^1.16.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  }
+}

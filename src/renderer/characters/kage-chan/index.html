@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAGE-CHAN</title>
+  <link rel="stylesheet" href="kage-chan.css">
+</head>
+<body>
+  <div id="companion-wrapper">
+    <!-- Speech Balloon -->
+    <div class="kc-speech-balloon" id="speech-balloon">
+      <span id="speech-text"></span>
+    </div>
+
+    <!-- Radial Interaction Menu -->
+    <div class="kc-interaction-menu" id="interaction-menu">
+      <div class="menu-item menu-talk" data-action="talk" data-tooltip="Talk with Kage-chan">💬</div>
+      <div class="menu-item menu-pet" data-action="pet" data-tooltip="Headpat Kage-chan">🌸</div>
+      <div class="menu-item menu-play" data-action="play" data-tooltip="Play with Kage-chan">✨</div>
+      <div class="menu-item menu-question" data-action="question" data-tooltip="Ask a Question">❓</div>
+      <div class="menu-item menu-sleep" data-action="sleep" data-tooltip="Rest & Nap">💤</div>
+      <div class="menu-item menu-settings" data-action="settings" data-tooltip="Open Settings">⚙️</div>
+      <div class="menu-item menu-close" data-action="close" data-tooltip="Close Menu">✖</div>
+      <div class="menu-tooltip" id="menu-tooltip"></div>
+    </div>
+  </div>
+
+  <script src="../../shared/audio/audioEngine.js"></script>
+  <script src="kage-chan-avatar.js"></script>
+  <script src="kage-chan.js"></script>
+</body>
+</html>

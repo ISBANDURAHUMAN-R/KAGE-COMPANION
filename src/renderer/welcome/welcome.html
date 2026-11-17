@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOIDKAGE — Welcome</title>
+  <link rel="stylesheet" href="../shared/styles/theme.css">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <div class="welcome-container">
+    <div class="welcome-header">
+      <div class="crest-icon"></div>
+      <h1>VOIDKAGE</h1>
+      <span class="sub-header">DESKTOP COMPANIONS SETUP</span>
+    </div>
+
+    <div class="welcome-content">
+      <p class="welcome-intro">
+        Meet your new interactive desktop companions. They live directly on your Windows desktop above your windows, ready to chat, react, and keep you company.
+      </p>
+
+      <div class="companion-selector">
+        <label class="companion-card" id="card-pick-kage">
+          <input type="checkbox" id="pick-kage" checked>
+          <div class="card-inner">
+            <div class="card-avatar-box kage-avatar-box">
+              <div class="shadow-blob"></div>
+            </div>
+            <h4>KAGE</h4>
+            <span class="card-role">The Shadow Pet</span>
+            <p>Curious, mischievous shadow blob with glowing red eyes. Loves chaos and dark snacks.</p>
+          </div>
+        </label>
+
+        <label class="companion-card" id="card-pick-chan">
+          <input type="checkbox" id="pick-chan" checked>
+          <div class="card-inner">
+            <div class="card-avatar-box chan-avatar-box">
+              <div class="anime-silhouette"></div>
+            </div>
+            <h4>KAGE-CHAN</h4>
+            <span class="card-role">Companion Girl</span>
+            <p>Supportive chibi anime girl with crimson hair streaks. Playful, caring, and slightly tsundere.</p>
+          </div>
+        </label>
+      </div>
+
+      <div class="options-box">
+        <label class="option-check">
+          <input type="checkbox" id="opt-startup" checked>
+          <span>Launch VOIDKAGE automatically when Windows starts</span>
+        </label>
+        <label class="option-check">
+          <input type="checkbox" id="opt-audio" checked>
+          <span>Enable synthesized sound effects & speech blips</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="welcome-footer">
+      <span class="footer-hint">Click characters to interact • Drag with mouse to move</span>
+      <button id="btn-enter" class="vk-btn vk-btn-primary btn-enter">
+        Enter the Void
+      </button>
+    </div>
+  </div>
+
+  <script src="../shared/audio/audioEngine.js"></script>
+  <script src="welcome.js"></script>
+</body>
+</html>

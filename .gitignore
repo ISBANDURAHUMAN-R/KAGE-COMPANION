@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+*.log
+test/temp-test-data/
+test-data/
+.vscode/
+.DS_Store
+Thumbs.db

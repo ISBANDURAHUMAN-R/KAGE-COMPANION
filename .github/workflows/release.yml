@@ -1,0 +1,49 @@
+name: VOIDKAGE Release Build
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run verification test suite
+        run: npm test
+
+      - name: Build Windows Installer & Portable ZIP
+        run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "VOIDKAGE v${{ github.ref_name }}"
+          draft: false
+          prerelease: false
+          body_path: CHANGELOG.md
+          files: |
+            dist/VOIDKAGE-Setup-*.exe
+            dist/VOIDKAGE-*.zip
+            README.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
