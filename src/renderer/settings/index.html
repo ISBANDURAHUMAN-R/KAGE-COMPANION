@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOIDKAGE — Control Center</title>
+  <title>KAGE COMPANION — Settings</title>
   <link rel="stylesheet" href="../shared/styles/theme.css">
   <link rel="stylesheet" href="settings.css">
 </head>
@@ -12,45 +12,47 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-crest">
-          <div class="crest-diamond"></div>
-        </div>
+        <img class="brand-logo-img" src="../assets/icons/logo.png" alt="KAGE COMPANION Logo" />
         <div class="brand-info">
-          <h1>VOIDKAGE</h1>
+          <h1>KAGE COMPANION</h1>
           <span class="brand-sub">DESKTOP COMPANIONS</span>
         </div>
       </div>
 
       <nav class="nav-menu">
-        <button class="nav-item active" data-tab="dashboard">
-          <span class="nav-icon">📊</span> Dashboard
+        <button class="nav-item active" data-tab="characters">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </span>
+          <span>Companions</span>
         </button>
-        <button class="nav-item" data-tab="characters">
-          <span class="nav-icon">👥</span> Characters
-        </button>
-        <button class="nav-item" data-tab="appearance">
-          <span class="nav-icon">✨</span> Appearance
-        </button>
-        <button class="nav-item" data-tab="personality">
-          <span class="nav-icon">🧠</span> Personality
-        </button>
-        <button class="nav-item" data-tab="moods">
-          <span class="nav-icon">🎭</span> Mood Settings
-        </button>
+
         <button class="nav-item" data-tab="interactions">
-          <span class="nav-icon">⚡</span> Interaction Settings
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+          </span>
+          <span>Behavior</span>
         </button>
+
         <button class="nav-item" data-tab="audio">
-          <span class="nav-icon">🔊</span> Audio Settings
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          </span>
+          <span>Audio</span>
         </button>
+
         <button class="nav-item" data-tab="startup">
-          <span class="nav-icon">🚀</span> Startup Settings
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+          </span>
+          <span>Startup & Privacy</span>
         </button>
-        <button class="nav-item" data-tab="privacy">
-          <span class="nav-icon">🛡️</span> Privacy & SQLite
-        </button>
+
         <button class="nav-item" data-tab="about">
-          <span class="nav-icon">ℹ️</span> About VOIDKAGE
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          </span>
+          <span>About</span>
         </button>
       </nav>
 
@@ -64,160 +66,67 @@
     <main class="content-area">
       <!-- Top Status Banner -->
       <header class="top-header">
-        <div class="header-title" id="page-title">Dashboard Overview</div>
+        <div class="header-title" id="page-title">Companion Controls</div>
         <div class="header-actions">
-          <div class="mode-pill" id="current-mode-pill">Mode: Normal</div>
           <button id="btn-reset-pos" class="vk-btn btn-sm">Reset Positions</button>
         </div>
       </header>
 
       <div class="tab-viewport">
-        <!-- 1. DASHBOARD TAB -->
-        <section class="tab-pane active" id="pane-dashboard">
-          <div class="status-grid">
-            <!-- Kage Status Card -->
-            <div class="vk-card char-card" id="card-kage">
-              <div class="card-header">
-                <div class="char-title">
-                  <img src="../characters/kage/assets/kage-main.png" alt="Kage" style="width:28px; height:28px; object-fit:contain; filter:drop-shadow(0 0 6px #ff1a2b);" />
-                  <h3>KAGE</h3>
-                  <span class="vk-badge vk-badge-red">Shadow Pet</span>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="dash-toggle-kage" checked>
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div class="char-stats">
-                <div class="stat-row">
-                  <span>Current Mood:</span>
-                  <strong id="dash-kage-mood" class="highlight-text">Idle</strong>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Affection</span><span id="dash-kage-aff">50%</span></div>
-                  <div class="meter-bar"><div class="fill red-fill" id="kage-aff-bar" style="width: 50%;"></div></div>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Energy</span><span id="dash-kage-energy">100%</span></div>
-                  <div class="meter-bar"><div class="fill purple-fill" id="kage-energy-bar" style="width: 100%;"></div></div>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Mischief</span><span id="dash-kage-mischief">80%</span></div>
-                  <div class="meter-bar"><div class="fill orange-fill" id="kage-mischief-bar" style="width: 80%;"></div></div>
-                </div>
-                <div class="stat-row mt-10">
-                  <span>Interactions:</span>
-                  <strong id="dash-kage-count">0</strong>
-                </div>
-              </div>
-            </div>
-
-            <!-- Kage-Chan Status Card -->
-            <div class="vk-card char-card" id="card-kage-chan">
-              <div class="card-header">
-                <div class="char-title">
-                  <img src="../characters/kage-chan/assets/kage-chan-main.png" alt="Kage-Chan" style="width:28px; height:28px; object-fit:contain; filter:drop-shadow(0 0 6px #ff4d66);" />
-                  <h3>KAGE-CHAN</h3>
-                  <span class="vk-badge vk-badge-red">Chibi Girl</span>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="dash-toggle-chan" checked>
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div class="char-stats">
-                <div class="stat-row">
-                  <span>Current Mood:</span>
-                  <strong id="dash-chan-mood" class="highlight-text">Idle</strong>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Affection</span><span id="dash-chan-aff">65%</span></div>
-                  <div class="meter-bar"><div class="fill red-fill" id="chan-aff-bar" style="width: 65%;"></div></div>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Energy</span><span id="dash-chan-energy">90%</span></div>
-                  <div class="meter-bar"><div class="fill purple-fill" id="chan-energy-bar" style="width: 90%;"></div></div>
-                </div>
-                <div class="stat-bar-group">
-                  <div class="stat-label"><span>Mischief</span><span id="dash-chan-mischief">40%</span></div>
-                  <div class="meter-bar"><div class="fill orange-fill" id="chan-mischief-bar" style="width: 40%;"></div></div>
-                </div>
-                <div class="stat-row mt-10">
-                  <span>Interactions:</span>
-                  <strong id="dash-chan-count">0</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Quick Actions & Mode Bar -->
-          <div class="vk-card mt-20">
-            <h4 class="card-subtitle">Desktop Operating Mode</h4>
-            <p class="card-desc">Control how often companions interact while you are working or gaming.</p>
-            <div class="mode-button-group">
-              <button class="mode-btn" data-mode="quiet">
-                <div class="mode-name">Quiet</div>
-                <div class="mode-desc">Silent companions, zero popups</div>
-              </button>
-              <button class="mode-btn" data-mode="focus">
-                <div class="mode-name">Focus</div>
-                <div class="mode-desc">Gentle breaks, work support</div>
-              </button>
-              <button class="mode-btn active" data-mode="normal">
-                <div class="mode-name">Normal</div>
-                <div class="mode-desc">Balanced chatter and cute idle play</div>
-              </button>
-              <button class="mode-btn" data-mode="active">
-                <div class="mode-name">Active</div>
-                <div class="mode-desc">High energy, banter & antics</div>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- 2. CHARACTERS TAB -->
-        <section class="tab-pane" id="pane-characters">
+        <!-- 1. COMPANIONS TAB -->
+        <section class="tab-pane active" id="pane-characters">
           <div class="settings-group">
-            <h3>Character Visibility & Sizing</h3>
-            
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Enable KAGE (The Shadow Pet)</label>
-                <span>Show or hide the shadow pet on the desktop</span>
+            <h3>Active Companions & Sizing</h3>
+            <p class="card-desc">Manage character visibility and screen scale. Click and drag either character on your desktop to move them freely.</p>
+
+            <!-- KAGE CARD -->
+            <div class="vk-card char-config-card mt-15">
+              <div class="char-header-row">
+                <div class="char-id-box">
+                  <img src="../characters/kage/assets/kage-main.png" alt="KAGE" class="char-preview-img" />
+                  <div>
+                    <h4>KAGE</h4>
+                    <span class="char-sub-badge">Shadow Pet</span>
+                  </div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="char-enable-kage" checked>
+                  <span class="slider"></span>
+                </label>
               </div>
-              <label class="switch">
-                <input type="checkbox" id="char-enable-kage" checked>
-                <span class="slider"></span>
-              </label>
+
+              <div class="setting-item mt-15">
+                <div class="setting-text">
+                  <label>Scale on Screen</label>
+                  <span>Size multiplier (<span id="val-kage-scale">100%</span>)</span>
+                </div>
+                <input type="range" id="range-kage-scale" min="0.6" max="1.8" step="0.05" value="1.0" class="vk-range">
+              </div>
             </div>
 
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>KAGE Scale</label>
-                <span>Adjust character size on screen (<span id="val-kage-scale">100%</span>)</span>
+            <!-- KAGE-CHAN CARD -->
+            <div class="vk-card char-config-card mt-15">
+              <div class="char-header-row">
+                <div class="char-id-box">
+                  <img src="../characters/kage-chan/assets/kage-chan-main.png" alt="KAGE-CHAN" class="char-preview-img" />
+                  <div>
+                    <h4>KAGE-CHAN</h4>
+                    <span class="char-sub-badge">Chibi Girl</span>
+                  </div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="char-enable-chan" checked>
+                  <span class="slider"></span>
+                </label>
               </div>
-              <input type="range" id="range-kage-scale" min="0.6" max="1.8" step="0.05" value="1.0" class="vk-range">
-            </div>
 
-            <hr class="setting-divider">
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Enable KAGE-CHAN (Companion Girl)</label>
-                <span>Show or hide Kage-chan on the desktop</span>
+              <div class="setting-item mt-15">
+                <div class="setting-text">
+                  <label>Scale on Screen</label>
+                  <span>Size multiplier (<span id="val-chan-scale">100%</span>)</span>
+                </div>
+                <input type="range" id="range-chan-scale" min="0.6" max="1.8" step="0.05" value="1.0" class="vk-range">
               </div>
-              <label class="switch">
-                <input type="checkbox" id="char-enable-chan" checked>
-                <span class="slider"></span>
-              </label>
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>KAGE-CHAN Scale</label>
-                <span>Adjust character size on screen (<span id="val-chan-scale">100%</span>)</span>
-              </div>
-              <input type="range" id="range-chan-scale" min="0.6" max="1.8" step="0.05" value="1.0" class="vk-range">
             </div>
 
             <div class="setting-actions mt-20">
@@ -226,160 +135,54 @@
           </div>
         </section>
 
-        <!-- 3. APPEARANCE TAB -->
-        <section class="tab-pane" id="pane-appearance">
-          <div class="settings-group">
-            <h3>Visual Atmosphere</h3>
-            
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Crimson Shadow Glow Aura</label>
-                <span>Atmospheric blood-red ambient glow around companions</span>
-              </div>
-              <label class="switch">
-                <input type="checkbox" id="app-enable-glow" checked>
-                <span class="slider"></span>
-              </label>
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Glow Intensity</label>
-                <span>Aura brightness multiplier (<span id="val-glow-intensity">80%</span>)</span>
-              </div>
-              <input type="range" id="range-glow-intensity" min="0.2" max="1.5" step="0.05" value="0.8" class="vk-range">
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Speech Bubble Style</label>
-                <span>Visual appearance of dialogue popups</span>
-              </div>
-              <select id="select-bubble-style" class="vk-select">
-                <option value="voidkage">VOIDKAGE Dark Crimson</option>
-                <option value="cyber">Cyberpunk Obsidian</option>
-                <option value="minimal">Minimalist Monochrome</option>
-              </select>
-            </div>
-          </div>
-        </section>
-
-        <!-- 4. PERSONALITY TAB -->
-        <section class="tab-pane" id="pane-personality">
-          <div class="settings-group">
-            <h3>Personality Dynamics</h3>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Affection Growth Rate</label>
-                <span>How quickly petting and playing build companion fondness</span>
-              </div>
-              <select id="select-aff-rate" class="vk-select">
-                <option value="fast">Fast (Friendly)</option>
-                <option value="normal" selected>Normal (Balanced)</option>
-                <option value="slow">Slow (Tsundere)</option>
-              </select>
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Kage Mischief Factor</label>
-                <span>Likelihood of Kage teasing Kage-chan or causing desktop chaos</span>
-              </div>
-              <input type="range" id="range-mischief" min="10" max="100" step="5" value="80" class="vk-range">
-            </div>
-          </div>
-        </section>
-
-        <!-- 5. MOODS TAB -->
-        <section class="tab-pane" id="pane-moods">
-          <div class="settings-group">
-            <h3>Manual Mood Overrides</h3>
-            <p class="card-desc">Force an expression state to test animations or set companion mood immediately.</p>
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Force KAGE Expression</label>
-                <span>Trigger any of the 13 animation states</span>
-              </div>
-              <div class="button-grid" id="kage-mood-btns">
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="idle">Idle</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="happy">Happy</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="sad">Sad</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="curious">Curious</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="angry">Angry</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="sleepy">Sleepy</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="surprised">Surprised</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="excited">Excited</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="walking">Walking</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="sitting">Sitting</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="sleeping">Sleeping</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="talking">Talking</button>
-                <button class="vk-btn btn-xs" data-char="kage" data-mood="teasing">Teasing</button>
-              </div>
-            </div>
-
-            <hr class="setting-divider">
-
-            <div class="setting-item">
-              <div class="setting-text">
-                <label>Force KAGE-CHAN Expression</label>
-                <span>Trigger any of the 13 animation states</span>
-              </div>
-              <div class="button-grid" id="chan-mood-btns">
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="idle">Idle</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="happy">Happy</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="sad">Sad</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="curious">Curious</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="angry">Angry</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="sleepy">Sleepy</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="surprised">Surprised</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="excited">Excited</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="walking">Walking</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="sitting">Sitting</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="sleeping">Sleeping</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="talking">Talking</button>
-                <button class="vk-btn btn-xs" data-char="kage-chan" data-mood="teasing">Teasing</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 6. INTERACTIONS TAB -->
+        <!-- 2. BEHAVIOR TAB -->
         <section class="tab-pane" id="pane-interactions">
           <div class="settings-group">
-            <h3>Autonomous Behavior & Intervals</h3>
+            <h3>Desktop Companion Behavior</h3>
+            <p class="card-desc">KAGE companions stay on your desktop with zero intrusive popups or unwanted cross-chatter.</p>
 
             <div class="setting-item">
               <div class="setting-text">
-                <label>Interaction Interval</label>
-                <span>Seconds between companion checks (<span id="val-interval">30s</span>)</span>
+                <label>Silent Idle Motions</label>
+                <span>Occasional subtle idle animation shifts (sitting, looking around, resting)</span>
               </div>
-              <input type="range" id="range-interval" min="15" max="120" step="5" value="30" class="vk-range">
+              <label class="switch">
+                <input type="checkbox" id="int-motion-enable" checked>
+                <span class="slider"></span>
+              </label>
             </div>
 
             <div class="setting-item">
               <div class="setting-text">
-                <label>Cross-Character Banter</label>
-                <span>Allow Kage and Kage-chan to talk and play together autonomously</span>
+                <label>Motion Check Interval</label>
+                <span>Seconds between gentle idle state transitions (<span id="val-interval">45s</span>)</span>
+              </div>
+              <input type="range" id="range-interval" min="20" max="180" step="5" value="45" class="vk-range">
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Cross-Character Banter & Speech</label>
+                <span>Companions talk together (Disabled: silent desktop companions)</span>
               </div>
               <label class="switch">
-                <input type="checkbox" id="int-cross-enable" checked>
+                <input type="checkbox" id="int-cross-enable">
                 <span class="slider"></span>
               </label>
             </div>
           </div>
         </section>
 
-        <!-- 7. AUDIO TAB -->
+        <!-- 3. AUDIO TAB -->
         <section class="tab-pane" id="pane-audio">
           <div class="settings-group">
-            <h3>Sound & Voice Lines</h3>
+            <h3>Audio & Sound Feedback</h3>
+            <p class="card-desc">Procedural Web Audio cues for companion headpats, clicks, and interactions.</p>
 
             <div class="setting-item">
               <div class="setting-text">
                 <label>Enable Sound Effects</label>
-                <span>Synthesized companion audio, purrs, and speech blips</span>
+                <span>Play gentle chimes and purrs when interacting with companions</span>
               </div>
               <label class="switch">
                 <input type="checkbox" id="audio-enable" checked>
@@ -405,24 +208,23 @@
 
             <div class="setting-item">
               <div class="setting-text">
-                <label>Test Sound Synthesizer</label>
-                <span>Audition procedural Web Audio cues</span>
+                <label>Test Audio Cues</label>
+                <span>Preview procedural synthesizer cues</span>
               </div>
               <div class="button-group">
                 <button class="vk-btn btn-sm" id="test-chirp">Chirp</button>
-                <button class="vk-btn btn-sm" id="test-pet">Pet Purr</button>
-                <button class="vk-btn btn-sm" id="test-play">Play Chime</button>
-                <button class="vk-btn btn-sm" id="test-question">Question</button>
+                <button class="vk-btn btn-sm" id="test-pet">Pet</button>
+                <button class="vk-btn btn-sm" id="test-play">Chime</button>
                 <button class="vk-btn btn-sm" id="test-sleep">Lullaby</button>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- 8. STARTUP TAB -->
+        <!-- 4. STARTUP & PRIVACY TAB -->
         <section class="tab-pane" id="pane-startup">
           <div class="settings-group">
-            <h3>Windows Startup Behavior</h3>
+            <h3>Windows Startup</h3>
 
             <div class="setting-item">
               <div class="setting-text">
@@ -438,70 +240,71 @@
             <div class="status-box mt-15">
               <div class="status-indicator-dot online"></div>
               <div class="status-box-text">
-                <strong>Windows Login Status: <span id="startup-status-text">Registered & Active</span></strong>
-                <p>Companions will launch seamlessly upon Windows startup in quiet background mode with saved positions restored.</p>
+                <strong>Status: <span id="startup-status-text">Active</span></strong>
+                <p>Companions launch quietly upon Windows login with previous coordinates restored.</p>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- 9. PRIVACY TAB -->
-        <section class="tab-pane" id="pane-privacy">
-          <div class="settings-group">
-            <h3>Local SQLite Database & Privacy</h3>
-            <p class="card-desc">VOIDKAGE is 100% offline and stores all memory and interaction logs locally in your Windows profile. No cloud sync, no tracking.</p>
+            <hr class="setting-divider mt-25">
+
+            <h3>Privacy & Local Storage</h3>
+            <p class="card-desc">KAGE COMPANION is 100% offline. All companion coordinates, scales, and preferences are stored locally in your Windows user profile.</p>
 
             <div class="storage-info-card vk-card mt-15">
               <div class="stat-row">
                 <span>Database Engine:</span>
-                <strong>SQLite 3 (WebAssembly Embedded)</strong>
+                <strong>SQLite 3 (Local Embedded WebAssembly)</strong>
               </div>
               <div class="stat-row">
                 <span>Storage Location:</span>
-                <span class="code-span">%APPDATA%\voidkage-companions\voidkage.sqlite</span>
+                <span class="code-span">%APPDATA%\kage-companion\kage.sqlite</span>
+              </div>
+              <div class="stat-row">
+                <span>Network Requests:</span>
+                <strong class="highlight-text">Zero (100% Offline)</strong>
               </div>
               <div class="mt-15">
                 <button id="btn-open-folder" class="vk-btn btn-sm">Open Data Folder</button>
                 <button id="btn-clear-history" class="vk-btn vk-btn-danger btn-sm">Clear History</button>
               </div>
             </div>
-
-            <h4 class="mt-20">Recent Interaction Logs</h4>
-            <div class="log-table-wrapper mt-10">
-              <table class="vk-table" id="table-logs">
-                <thead>
-                  <tr>
-                    <th>Time</th>
-                    <th>Character</th>
-                    <th>Type</th>
-                    <th>Dialogue</th>
-                  </tr>
-                </thead>
-                <tbody id="logs-tbody">
-                  <!-- Dynamically populated -->
-                </tbody>
-              </table>
-            </div>
           </div>
         </section>
 
-        <!-- 10. ABOUT TAB -->
+        <!-- 5. ABOUT TAB -->
         <section class="tab-pane" id="pane-about">
           <div class="settings-group">
             <div class="about-hero">
-              <div class="about-crest"></div>
-              <h2>VOIDKAGE</h2>
+              <img class="about-logo-img" src="../assets/icons/logo.png" alt="KAGE COMPANION" />
+              <h2>KAGE COMPANION</h2>
               <span class="about-version">Desktop Companions v1.0.0</span>
-              <p class="about-tagline">Living chibi desktop companions designed for Windows 10 & 11.</p>
+              <p class="about-tagline">Living personal chibi desktop companions for Windows 10 & 11.</p>
             </div>
 
             <div class="vk-card mt-20">
-              <h4>Design Philosophy</h4>
-              <p>VOIDKAGE companions live on your Windows desktop above your windows. Featuring KAGE the mischievous shadow pet and KAGE-CHAN the caring anime chibi girl, they react, banter, and keep you company as you write code, browse, or game.</p>
+              <h4>Creator & Ownership</h4>
+              <p style="font-size: 13px; line-height: 1.6; color: var(--text-primary); margin-bottom: 12px;">
+                <strong>Created, Developed & Owned by Isbandu Rahuman R.</strong><br>
+                All rights reserved to <strong>Isbandu Rahuman R.</strong>
+              </p>
+              <div class="specs-grid mt-10" style="grid-template-columns: 1fr;">
+                <div class="spec-item"><strong>Founder & Creator:</strong> Isbandu Rahuman R.</div>
+                <div class="spec-item"><strong>Developer & Owner:</strong> Isbandu Rahuman R.</div>
+                <div class="spec-item"><strong>Concept & Product Design:</strong> Isbandu Rahuman R.</div>
+                <div class="spec-item"><strong>Application Development:</strong> Isbandu Rahuman R.</div>
+              </div>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 12px; line-height: 1.4;">
+                KAGE Companion is an independently developed personal companion application created by Isbandu Rahuman R. Official Ownership: Isbandu Rahuman R.
+              </p>
+            </div>
+
+            <div class="vk-card mt-20">
+              <h4>About the Companions</h4>
+              <p>KAGE Desktop Companions live on your Windows desktop above your windows. Featuring KAGE the mischievous shadow pet and KAGE-CHAN the chibi girl, they react smoothly to mouse interactions, stay in place, and quietly keep you company as you browse, write code, or relax.</p>
               <div class="specs-grid mt-15">
                 <div class="spec-item"><strong>Platform:</strong> Windows 10 / 11 64-bit</div>
-                <div class="spec-item"><strong>Colors:</strong> Black × Blood Red × White</div>
-                <div class="spec-item"><strong>Engine:</strong> Electron + SQLite3 + Web Audio</div>
+                <div class="spec-item"><strong>Visual Identity:</strong> Black × Crimson × White</div>
+                <div class="spec-item"><strong>Architecture:</strong> Electron + SQLite3 + Web Audio</div>
                 <div class="spec-item"><strong>License:</strong> MIT Open Source</div>
               </div>
             </div>

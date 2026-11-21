@@ -7,7 +7,7 @@ const relationshipEngine = require('../src/main/engine/relationshipEngine');
 const { KAGE_DIALOGUES, KAGE_CHAN_DIALOGUES, CROSS_DIALOGUES } = require('../src/main/engine/dialogueDatabase');
 
 async function runTests() {
-  console.log('=== RUNNING VOIDKAGE AUTOMATED SYSTEM TESTS ===');
+  console.log('=== RUNNING KAGE COMPANION AUTOMATED SYSTEM TESTS ===');
 
   const testDataDir = path.join(__dirname, 'temp-test-data');
   if (fs.existsSync(testDataDir)) {

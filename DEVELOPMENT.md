@@ -1,9 +1,20 @@
-# VOIDKAGE — Desktop Companions Development Log
+# KAGE COMPANION — Development Log
+
+## Project Ownership & Attribution
+- **Founder & Creator:** Isbandu Rahuman R.
+- **Developer:** Isbandu Rahuman R.
+- **Project Owner:** Isbandu Rahuman R.
+- **Concept & Product Design:** Isbandu Rahuman R.
+- **Application Development:** Isbandu Rahuman R.
+- **All rights reserved to:** **Isbandu Rahuman R.**
+
+*KAGE Companion is an independently developed personal companion application created by Isbandu Rahuman R.*  
+*Official Ownership: Isbandu Rahuman R.*
 
 ## Project Overview
-- **Application**: VOIDKAGE Desktop Companions
+- **Application**: KAGE COMPANION
 - **Characters**: KAGE (The Shadow Pet) & KAGE-CHAN (Chibi Anime Companion)
-- **Aesthetic**: VOIDKAGE Cyber-Gothic / Shadow (Black #0a0a0c, Blood Red #ff1a2b, Pure White #ffffff)
+- **Aesthetic**: Cyber-Gothic / Shadow (Black #0a0a0c, Blood Red #ff1a2b, Pure White #ffffff)
 - **Target Platform**: Windows 10 / Windows 11 (64-bit)
 - **Architecture**: Modular Electron Application with SQLite persistence, Context Isolation, and Layered Vector Animation Engine.
 
@@ -44,23 +55,26 @@
 - [x] Autonomous banter and shared activities between Kage and Kage-Chan
 - [x] Sequenced multi-stage dialogues broadcast to both desktop companions
 
-### Phase 5: VOIDKAGE Control Center & Settings [COMPLETED]
-- [x] 10-section VOIDKAGE dashboard (`src/renderer/settings/`):
-  1. Dashboard (live status, mood telemetry, affection & energy bars)
-  2. Characters (visibility, scaling 60%-180%, opacity, position resets)
-  3. Appearance (glow effects, speech bubble themes)
-  4. Personality (decay rates, affection multipliers, mischief factor)
-  5. Mood Settings (manual overrides for all 13 states)
-  6. Interaction Settings (autonomous rates, operating modes)
-  7. Audio Settings (master volume, voice pitch, test audition)
-  8. Startup Settings (Windows Login auto-launch, registry verification)
-  9. Privacy (local-only verification, SQLite data management, export/clear)
-  10. About VOIDKAGE (credits, design specs, version info)
+### Phase 5: KAGE COMPANION Settings & Cleanup [COMPLETED]
+- [x] Streamlined 5-tab KAGE COMPANION settings window (`src/renderer/settings/`):
+  1. Companions (character previews, visibility toggles, scaling 60%-180%, position resets)
+  2. Behavior (motion interval timing, quiet desktop mode, companion responsiveness)
+  3. Audio (synthesizer toggle, master volume, voice pitch, test audition)
+  4. Startup & Privacy (Windows login auto-launch, 100% offline local SQLite storage verification, data folder shortcut, memory reset)
+  5. About KAGE COMPANION (credits, design specs, version info, open-source MIT license)
+- [x] Vector SVG icon navigation (removed emojis and decorative clutter)
+- [x] Removed redundant Appearance tab, fake RPG stats (affection/energy/mischief meters), and debug trigger buttons
+- [x] Silent desktop companion architecture: eliminated autonomous speech balloon popups and unsolicited cross-talk
 - [x] First-Launch Setup Wizard (`src/renderer/welcome/welcome.html`)
 - [x] Built-in procedural Web Audio API sound synthesizer (`audioEngine.js`)
 
-### Phase 6: Windows Release & Packaging [IN PROGRESS]
+### Phase 6: Windows Release & Packaging [COMPLETED]
 - [x] Automated test suite (`test/test-all.js`) passing 100%
 - [x] High-res application icons (ICO and PNG formats generated)
 - [x] Windows build configuration in `package.json` (NSIS Installer + Portable ZIP)
-- [x] Build and package release binaries
+- [x] Build and package release binaries (`KAGE-COMPANION-Setup-x64.exe` & `KAGE-COMPANION-Portable-x64.zip`)
+- [x] Fixed transparent window dragging with pointer capture and native drag suppression
+- [x] Implemented instant automatic mood and expression cycling on click
+- [x] Authentic transparent PNG artwork for KAGE & KAGE-CHAN in custom chibi style
+- [x] Desktop bounds clamping for 720p, 1080p, and 4K displays
+- [x] Live desktop execution verified with zero runtime errors

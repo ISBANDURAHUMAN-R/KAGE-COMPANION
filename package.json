@@ -1,11 +1,11 @@
 {
-  "name": "voidkage-companions",
-  "productName": "VOIDKAGE",
+  "name": "kage-companion",
+  "productName": "KAGE COMPANION",
   "version": "1.0.0",
-  "description": "VOIDKAGE Desktop Companions — KAGE & KAGE-CHAN Interactive Windows Desktop Pets",
+  "description": "KAGE COMPANION — KAGE & KAGE-CHAN Interactive Windows Desktop Pets",
   "main": "src/main/index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "cmd /c \"set ELECTRON_RUN_AS_NODE=& electron .\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --win",
     "dist:portable": "electron-builder --win portable",
@@ -14,18 +14,18 @@
   "keywords": [
     "desktop-pet",
     "companion",
-    "voidkage",
+    "kage-companion",
     "chibi",
     "electron",
     "windows"
   ],
-  "author": "VOIDKAGE Team",
+  "author": "Isbandu Rahuman R.",
   "license": "MIT",
   "type": "commonjs",
   "build": {
-    "appId": "com.voidkage.companions",
-    "productName": "VOIDKAGE",
-    "copyright": "Copyright © 2026 VOIDKAGE",
+    "appId": "com.isbandu.kagecompanion",
+    "productName": "KAGE COMPANION",
+    "copyright": "Copyright © 2026 Isbandu Rahuman R. All rights reserved.",
     "directories": {
       "output": "dist",
       "buildResources": "build"
@@ -54,10 +54,10 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "VOIDKAGE",
-      "uninstallDisplayName": "VOIDKAGE Desktop Companions",
+      "shortcutName": "KAGE COMPANION",
+      "uninstallDisplayName": "KAGE COMPANION",
       "runAfterFinish": true,
-      "artifactName": "VOIDKAGE-Setup-${version}.${ext}"
+      "artifactName": "KAGE-COMPANION-Setup-${version}.${ext}"
     },
     "files": [
       "src/**/*",

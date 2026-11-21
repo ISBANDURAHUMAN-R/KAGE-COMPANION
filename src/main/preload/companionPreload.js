@@ -25,7 +25,10 @@ contextBridge.exposeInMainWorld('companionAPI', {
   hideCharacter: (characterId) => ipcRenderer.invoke('companion:hide', characterId),
   
   // Dragging IPC
+  setPosition: (characterId, x, y) => ipcRenderer.invoke('companion:set-position', { characterId, x, y }),
+  setPositionFast: (characterId, x, y) => ipcRenderer.send('companion:set-position-fast', { characterId, x, y }),
   moveWindow: (characterId, dx, dy) => ipcRenderer.invoke('companion:move-by', { characterId, dx, dy }),
+  moveByFast: (characterId, dx, dy) => ipcRenderer.send('companion:move-by-fast', { characterId, dx, dy }),
   
   // Sound trigger
   playSound: (soundName) => ipcRenderer.invoke('audio:play', soundName)

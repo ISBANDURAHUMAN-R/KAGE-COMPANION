@@ -11,14 +11,14 @@ class CompanionWindowFactory {
     const winWidth = 260;
     const winHeight = 280;
 
-    // Calculate default positions if not set
+    // Calculate default positions prominently in bottom-right desktop
     let defaultX, defaultY;
     if (characterId === 'kage') {
-      defaultX = Math.round(screenWidth - winWidth - 30);
-      defaultY = Math.round(screenHeight - winHeight - 30);
+      defaultX = Math.round(screenWidth - winWidth * 2 - 40);
+      defaultY = Math.round(screenHeight - winHeight - 40);
     } else {
-      defaultX = Math.round(screenWidth - winWidth * 2 - 50);
-      defaultY = Math.round(screenHeight - winHeight - 30);
+      defaultX = Math.round(screenWidth - winWidth - 20);
+      defaultY = Math.round(screenHeight - winHeight - 40);
     }
 
     let posX = (charData.x !== undefined && charData.x >= 0) ? charData.x : defaultX;
@@ -28,10 +28,10 @@ class CompanionWindowFactory {
     const inBounds = screen.getAllDisplays().some(disp => {
       const b = disp.bounds;
       return (
-        posX >= b.x &&
-        posX <= b.x + b.width - 50 &&
-        posY >= b.y &&
-        posY <= b.y + b.height - 50
+        posX >= b.x - 20 &&
+        posX <= b.x + b.width - 60 &&
+        posY >= b.y - 20 &&
+        posY <= b.y + b.height - 60
       );
     });
 
@@ -49,23 +49,22 @@ class CompanionWindowFactory {
       frame: false,
       alwaysOnTop: true,
       hasShadow: false,
-      skipTaskbar: true,
+      skipTaskbar: false,
+      icon: path.join(__dirname, '../../renderer/assets/icons/icon.ico'),
       resizable: false,
       maximizable: false,
       fullscreenable: false,
-      show: false,
+      show: true,
       webPreferences: {
         preload: path.join(__dirname, '../preload/companionPreload.js'),
         contextIsolation: true,
         nodeIntegration: false,
         sandbox: false,
-        backgroundThrottling: false // Keep animations active even when backgrounded
+        backgroundThrottling: false
       }
     });
 
-    // Windows always on top level
-    win.setAlwaysOnTop(true, 'screen-saver');
-    win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    win.setAlwaysOnTop(true);
 
     const htmlPath = path.join(
       __dirname,
@@ -73,11 +72,8 @@ class CompanionWindowFactory {
     );
     win.loadFile(htmlPath);
 
-    win.once('ready-to-show', () => {
-      if (charData.enabled !== 0) {
-        win.show();
-      }
-    });
+    win.show();
+    win.focus();
 
     // Save position on move
     win.on('moved', () => {

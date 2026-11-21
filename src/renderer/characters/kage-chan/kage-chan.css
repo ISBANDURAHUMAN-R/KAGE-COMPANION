@@ -10,7 +10,7 @@ body, html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: transparent;
+  background: transparent !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -21,48 +21,51 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent !important;
 }
 
-/* Character Container */
+/* Character Container — Transparent Floating Desktop Companion */
 .kage-chan-container {
   position: relative;
   width: 180px;
-  height: 200px;
+  height: 195px;
   cursor: grab;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .kage-chan-container:active {
   cursor: grabbing;
 }
 
-/* Crimson Shadow Aura */
+/* Crimson Aura */
 .kc-aura {
   position: absolute;
-  width: 160px;
-  height: 175px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 26, 43, 0.24) 0%, rgba(30, 8, 16, 0.5) 60%, transparent 80%);
-  filter: blur(14px);
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.22) 0%, rgba(10, 10, 15, 0.5) 50%, transparent 75%);
+  filter: blur(12px);
   z-index: 1;
-  animation: kcAuraPulse 4s ease-in-out infinite alternate;
+  animation: kcAuraPulse 3.5s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 @keyframes kcAuraPulse {
-  0% { transform: scale(0.92); opacity: 0.35; }
-  100% { transform: scale(1.1); opacity: 0.75; }
+  0% { transform: scale(0.9); opacity: 0.4; }
+  100% { transform: scale(1.15); opacity: 0.85; }
 }
 
-/* Floating Red Sparkles */
+/* Sparkles / Particles */
 .kc-particle {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #ff4d66;
+  background: #ff1a2b;
   box-shadow: 0 0 8px #ff1a2b;
   z-index: 1;
   pointer-events: none;
@@ -70,27 +73,27 @@ body, html {
 }
 
 .p1 {
-  top: 30%;
+  top: 35%;
   left: 15%;
-  animation: kcFloat 3.5s infinite ease-out;
+  animation: kcFloatParticle 3s infinite ease-out;
 }
 
 .p2 {
-  top: 40%;
+  top: 45%;
   right: 15%;
-  animation: kcFloat 2.8s infinite ease-out 1.2s;
+  animation: kcFloatParticle 2.5s infinite ease-out 1s;
 }
 
 .p3 {
   bottom: 25%;
-  left: 48%;
-  animation: kcFloat 3.6s infinite ease-out 2s;
+  left: 45%;
+  animation: kcFloatParticle 3.2s infinite ease-out 1.8s;
 }
 
-@keyframes kcFloat {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+@keyframes kcFloatParticle {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
   50% { opacity: 0.85; }
-  100% { transform: translateY(-35px) rotate(180deg); opacity: 0; }
+  100% { transform: translateY(-40px) scale(0.2); opacity: 0; }
 }
 
 /* Sprite Wrapper & Images */
@@ -105,38 +108,48 @@ body, html {
 }
 
 .kc-sprite {
-  max-width: 170px;
-  max-height: 185px;
+  max-width: 150px;
+  max-height: 150px;
   object-fit: contain;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 8px rgba(255, 26, 43, 0.45));
   transition: transform 0.2s ease;
+  pointer-events: none;
 }
 
 /* ------------------- STATE ANIMATIONS ------------------- */
 
 /* Idle */
 .kage-chan-container.state-idle .kc-sprite-wrapper {
-  animation: kcIdleBob 3.2s ease-in-out infinite alternate;
+  animation: kcIdleBob 3s ease-in-out infinite alternate;
 }
 
 @keyframes kcIdleBob {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(2px); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
+  100% { transform: translateY(2px) rotate(-1.5deg); }
 }
 
 /* Happy */
 .kage-chan-container.state-happy .kc-sprite-wrapper {
-  animation: kcHappyBounce 0.65s ease-in-out infinite alternate;
+  animation: kcHappyBounce 0.6s ease-in-out infinite alternate;
 }
 @keyframes kcHappyBounce {
-  0% { transform: translateY(2px) scale(1, 0.97); }
-  100% { transform: translateY(-14px) scale(0.98, 1.03); }
+  0% { transform: translateY(2px) scale(1, 0.96); }
+  100% { transform: translateY(-16px) scale(0.96, 1.05); }
 }
 
-/* Sad / Blushing */
+/* Blushing */
+.kage-chan-container.state-blushing .kc-sprite-wrapper {
+  animation: kcBlushSway 2.5s ease-in-out infinite alternate;
+}
+@keyframes kcBlushSway {
+  0% { transform: rotate(-3deg) translateY(0); }
+  100% { transform: rotate(3deg) translateY(-5px); }
+}
+
+/* Sad */
 .kage-chan-container.state-sad .kc-sprite-wrapper {
-  animation: kcSadDroop 3.2s ease-in-out infinite alternate;
+  animation: kcSadDroop 3s ease-in-out infinite alternate;
 }
 @keyframes kcSadDroop {
   0% { transform: translateY(2px); }
@@ -145,164 +158,103 @@ body, html {
 
 /* Curious */
 .kage-chan-container.state-curious .kc-sprite-wrapper {
-  animation: kcCuriousTilt 2.2s ease-in-out infinite alternate;
+  animation: kcCuriousTilt 2s ease-in-out infinite alternate;
 }
 @keyframes kcCuriousTilt {
-  0% { transform: rotate(-5deg) translateY(-2px); }
-  100% { transform: rotate(-8deg) translateY(-5px); }
+  0% { transform: rotate(-8deg) translateY(-3px); }
+  100% { transform: rotate(-12deg) translateY(-5px); }
 }
 
 /* Angry */
 .kage-chan-container.state-angry .kc-sprite-wrapper {
-  animation: kcAngryShake 0.15s linear infinite alternate;
+  animation: kcAngryVibrate 0.12s linear infinite alternate;
 }
-.kage-chan-container.state-angry .kc-aura {
-  background: radial-gradient(circle, rgba(255, 26, 43, 0.65) 0%, rgba(60, 10, 20, 0.7) 65%, transparent 85%);
-}
-@keyframes kcAngryShake {
+@keyframes kcAngryVibrate {
   0% { transform: translate(-2px, -1px); }
   100% { transform: translate(2px, 1px); }
 }
 
+/* Rage / Demon */
+.kage-chan-container.state-rage .kc-sprite-wrapper,
+.kage-chan-container.state-demon .kc-sprite-wrapper {
+  animation: kcRageShake 0.08s linear infinite alternate;
+}
+.kage-chan-container.state-rage .kc-aura,
+.kage-chan-container.state-demon .kc-aura {
+  background: radial-gradient(circle, rgba(255, 26, 43, 0.75) 0%, rgba(180, 0, 20, 0.5) 60%, transparent 80%);
+}
+@keyframes kcRageShake {
+  0% { transform: translate(-3px, -2px) scale(1.02); }
+  100% { transform: translate(3px, 2px) scale(1.04); }
+}
+
 /* Sleepy */
 .kage-chan-container.state-sleepy .kc-sprite-wrapper {
-  animation: kcSleepySway 3.6s ease-in-out infinite alternate;
+  animation: kcSleepySway 3.5s ease-in-out infinite alternate;
 }
 @keyframes kcSleepySway {
   0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(5px) rotate(3deg); }
+  100% { transform: translateY(5px) rotate(4deg); }
 }
 
 /* Sleeping */
 .kage-chan-container.state-sleeping .kc-sprite-wrapper {
-  animation: kcSleeping 3s ease-in-out infinite alternate;
+  animation: kcSleepPuddle 2.8s ease-in-out infinite alternate;
 }
-@keyframes kcSleeping {
-  0% { transform: translateY(8px) scale(1.03, 0.97); }
-  100% { transform: translateY(10px) scale(1.05, 0.95); }
+@keyframes kcSleepPuddle {
+  0% { transform: translateY(8px) scale(1.04, 0.96); }
+  100% { transform: translateY(10px) scale(1.06, 0.94); }
 }
 
-/* Surprised */
-.kage-chan-container.state-surprised .kc-sprite-wrapper {
+/* Surprised / Shocked */
+.kage-chan-container.state-surprised .kc-sprite-wrapper,
+.kage-chan-container.state-shocked .kc-sprite-wrapper {
   animation: kcSurpriseJump 0.4s ease-out 1 forwards;
 }
 @keyframes kcSurpriseJump {
   0% { transform: translateY(0); }
-  45% { transform: translateY(-18px) scale(0.92, 1.1); }
+  40% { transform: translateY(-20px) scale(0.9, 1.15); }
   100% { transform: translateY(-6px) scale(1, 1); }
 }
 
 /* Excited */
 .kage-chan-container.state-excited .kc-sprite-wrapper {
-  animation: kcExcitedTwirl 0.8s ease-in-out infinite alternate;
+  animation: kcExcitedSpin 0.8s ease-in-out infinite alternate;
 }
-@keyframes kcExcitedTwirl {
-  0% { transform: translateY(-4px) rotate(-4deg); }
-  100% { transform: translateY(-16px) rotate(4deg); }
-}
-
-/* Walking */
-.kage-chan-container.state-walking .kc-sprite-wrapper {
-  animation: kcWalkWaddle 0.65s ease-in-out infinite alternate;
-}
-@keyframes kcWalkWaddle {
-  0% { transform: translateX(-12px) rotate(-3deg); }
-  100% { transform: translateX(12px) rotate(3deg); }
-}
-
-/* Sitting */
-.kage-chan-container.state-sitting .kc-sprite-wrapper {
-  transform: translateY(6px);
-}
-
-/* Talking */
-.kage-chan-container.state-talking .kc-sprite-wrapper {
-  animation: kcTalkBob 0.3s ease-in-out infinite alternate;
-}
-@keyframes kcTalkBob {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-4px); }
+@keyframes kcExcitedSpin {
+  0% { transform: translateY(-4px) rotate(-5deg); }
+  100% { transform: translateY(-16px) rotate(5deg); }
 }
 
 /* Teasing */
 .kage-chan-container.state-teasing .kc-sprite-wrapper {
-  animation: kcTeaseWiggle 1.6s ease-in-out infinite alternate;
+  animation: kcTeaseWiggle 1.5s ease-in-out infinite alternate;
 }
 @keyframes kcTeaseWiggle {
-  0% { transform: rotate(-4deg) translateY(-2px); }
-  100% { transform: rotate(5deg) translateY(-6px); }
+  0% { transform: rotate(-5deg) translateY(-2px); }
+  100% { transform: rotate(7deg) translateY(-7px); }
 }
 
-/* Emote Bubble */
+/* Walking */
+.kage-chan-container.state-walking .kc-sprite-wrapper {
+  animation: kcWalkWaddle 0.7s ease-in-out infinite alternate;
+}
+@keyframes kcWalkWaddle {
+  0% { transform: translateX(-14px) rotate(-4deg); }
+  100% { transform: translateX(14px) rotate(4deg); }
+}
+
+/* Emote Bubble (Disabled: Zero Emojis) */
 .kc-emote {
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff1a2b;
-  text-shadow: 0 0 10px rgba(255, 26, 43, 0.8), 0 2px 4px #000;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(0.5) translateY(10px);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: none !important;
 }
 
-.kc-emote.show-heart,
-.kc-emote.show-tear,
-.kc-emote.show-question,
-.kc-emote.show-angry,
-.kc-emote.show-zzz,
-.kc-emote.show-exclamation,
-.kc-emote.show-star {
-  opacity: 1;
-  transform: scale(1.1) translateY(0);
-}
-
-/* Speech Balloon */
+/* ------------------- SPEECH BALLOON (HIDDEN NO QUESTION POPUPS) ------------------- */
 .kc-speech-balloon {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  background: rgba(12, 12, 16, 0.96);
-  border: 1.5px solid #ff1a2b;
-  color: #f5f5fa;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  max-width: 220px;
-  min-width: 140px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85), 0 0 12px rgba(255, 26, 43, 0.3);
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  backdrop-filter: blur(8px);
+  display: none !important;
 }
 
-.kc-speech-balloon.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-18px);
-}
-
-.kc-speech-balloon::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 7px;
-  border-style: solid;
-  border-color: #ff1a2b transparent transparent transparent;
-}
-
-/* Radial Interaction Menu */
+/* Interaction Menu */
 .kc-interaction-menu {
   position: absolute;
   top: 50%;
@@ -342,6 +294,13 @@ body, html {
   transition: all 0.18s ease;
 }
 
+.menu-item svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: block;
+}
+
 .menu-item:hover {
   background: #ff1a2b;
   color: #fff;
@@ -352,7 +311,6 @@ body, html {
 .menu-talk     { top: 5px;   left: 90px; }
 .menu-pet      { top: 35px;  right: 15px; }
 .menu-play     { bottom: 45px; right: 15px; }
-.menu-question { bottom: 5px; left: 90px; }
 .menu-sleep    { bottom: 45px; left: 15px; }
 .menu-settings { top: 35px;  left: 15px; }
 .menu-close    { top: 90px;  left: 90px; background: #2a080c; border-color: #661118; font-size: 13px; }

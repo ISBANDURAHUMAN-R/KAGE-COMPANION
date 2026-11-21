@@ -23,6 +23,19 @@ body, html {
   text-align: center;
 }
 
+.welcome-logo-img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  margin: 0 auto 8px;
+  display: block;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1.5px solid var(--red-primary);
+  padding: 3px;
+  box-shadow: 0 0 12px rgba(255, 26, 43, 0.45);
+}
+
 .crest-icon {
   width: 36px;
   height: 36px;

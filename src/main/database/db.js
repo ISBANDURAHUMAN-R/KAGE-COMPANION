@@ -17,7 +17,14 @@ class DatabaseManager {
     if (!fs.existsSync(userDataPath)) {
       fs.mkdirSync(userDataPath, { recursive: true });
     }
-    this.dbPath = path.join(userDataPath, 'voidkage.sqlite');
+    this.dbPath = path.join(userDataPath, 'kage.sqlite');
+    // If legacy voidkage.sqlite exists and kage.sqlite does not, copy forward
+    const legacyPath = path.join(userDataPath, 'voidkage.sqlite');
+    if (!fs.existsSync(this.dbPath) && fs.existsSync(legacyPath)) {
+      try {
+        fs.copyFileSync(legacyPath, this.dbPath);
+      } catch (e) {}
+    }
 
     // Locate sql-wasm.wasm
     const wasmPath = path.join(__dirname, '../../../node_modules/sql.js/dist/sql-wasm.wasm');
@@ -30,19 +37,28 @@ class DatabaseManager {
       }
     });
 
+    let dbLoaded = false;
     if (fs.existsSync(this.dbPath)) {
       try {
         const fileBuffer = fs.readFileSync(this.dbPath);
         this.db = new SQL.Database(fileBuffer);
+        // Test database integrity
+        this.db.exec("PRAGMA schema_version;");
+        this.initTables();
+        dbLoaded = true;
       } catch (err) {
-        console.error('Failed to load existing SQLite database, creating new:', err);
-        this.db = new SQL.Database();
+        console.error('Failed to load existing SQLite database, creating fresh database:', err);
+        try {
+          fs.renameSync(this.dbPath, this.dbPath + '.corrupt.' + Date.now());
+        } catch (e) {}
       }
-    } else {
-      this.db = new SQL.Database();
     }
 
-    this.initTables();
+    if (!dbLoaded) {
+      this.db = new SQL.Database();
+      this.initTables();
+    }
+
     this.initialized = true;
     this.saveImmediately();
   }
@@ -89,15 +105,17 @@ class DatabaseManager {
     // Ensure default settings exist
     const defaultSettings = {
       'desktop_mode': 'normal', // quiet, focus, normal, active
+      'cross_interactions': 'false',
+      'autonomous_dialogue': 'false',
       'sound_enabled': 'true',
       'sound_volume': '0.7',
       'voice_pitch': '1.0',
       'theme_glow': 'true',
       'glow_intensity': '0.8',
-      'bubble_style': 'voidkage',
+      'bubble_style': 'clean',
       'auto_launch': 'true',
       'start_minimized': 'false',
-      'interaction_interval': '30', // seconds between autonomous checks
+      'interaction_interval': '45', // seconds between autonomous checks
       'first_launch_done': 'false'
     };
 

@@ -3,7 +3,7 @@ const path = require('path');
 
 let settingsWin = null;
 
-function createSettingsWindow(defaultTab = 'dashboard') {
+function createSettingsWindow(defaultTab = 'characters') {
   if (settingsWin && !settingsWin.isDestroyed()) {
     settingsWin.show();
     settingsWin.focus();
@@ -14,15 +14,16 @@ function createSettingsWindow(defaultTab = 'dashboard') {
   }
 
   settingsWin = new BrowserWindow({
-    width: 980,
-    height: 700,
-    minWidth: 800,
-    minHeight: 600,
-    title: 'VOIDKAGE — Desktop Companions Dashboard',
+    width: 920,
+    height: 640,
+    minWidth: 760,
+    minHeight: 520,
+    title: 'KAGE COMPANION — Settings',
     backgroundColor: '#0a0a0c',
+    icon: path.join(__dirname, '../../renderer/assets/icons/icon.ico'),
     frame: true,
     autoHideMenuBar: true,
-    show: false,
+    show: true,
     webPreferences: {
       preload: path.join(__dirname, '../preload/settingsPreload.js'),
       contextIsolation: true,
@@ -34,12 +35,8 @@ function createSettingsWindow(defaultTab = 'dashboard') {
   const htmlPath = path.join(__dirname, '../../renderer/settings/index.html');
   settingsWin.loadFile(htmlPath);
 
-  settingsWin.once('ready-to-show', () => {
-    settingsWin.show();
-    if (defaultTab) {
-      settingsWin.webContents.send('settings:switch-tab', defaultTab);
-    }
-  });
+  settingsWin.show();
+  settingsWin.focus();
 
   settingsWin.on('close', (e) => {
     // When user closes settings, don't quit the whole app, just close this window

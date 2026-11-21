@@ -54,16 +54,12 @@ async function initializeApp() {
   // 3. Create tray icon
   createTray();
 
-  // 4. Check if first launch
-  const firstLaunchDone = db.getSetting('first_launch_done', 'false') === 'true';
+  // 4. Launch companions immediately on desktop
+  launchCompanions();
 
-  if (!firstLaunchDone && !isStartupLaunch) {
-    createWelcomeWindow(() => {
-      db.setSetting('first_launch_done', 'true');
-      launchCompanions();
-    });
-  } else {
-    launchCompanions();
+  // 5. Open Settings if not startup launch
+  if (!isStartupLaunch) {
+    createSettingsWindow('characters');
   }
 
   // 5. Start autonomous behavior loop
@@ -111,12 +107,12 @@ function createTray() {
   const trayIconPath = path.join(__dirname, '../renderer/assets/icons/tray-icon.png');
   const trayImage = nativeImage.createFromPath(trayIconPath);
   tray = new Tray(trayImage);
-  tray.setToolTip('VOIDKAGE — Desktop Companions');
+  tray.setToolTip('KAGE COMPANION — Desktop Pets');
 
   updateTrayMenu();
 
   tray.on('double-click', () => {
-    createSettingsWindow('dashboard');
+    createSettingsWindow('characters');
   });
 }
 
@@ -128,11 +124,11 @@ function updateTrayMenu() {
   const currentMode = db.getSetting('desktop_mode', 'normal');
 
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'VOIDKAGE Companions', enabled: false },
+    { label: 'KAGE COMPANION', enabled: false },
     { type: 'separator' },
     {
-      label: 'Open Dashboard / Settings',
-      click: () => createSettingsWindow('dashboard')
+      label: 'Open Settings',
+      click: () => createSettingsWindow('characters')
     },
     { type: 'separator' },
     {
@@ -194,7 +190,7 @@ function updateTrayMenu() {
     },
     { type: 'separator' },
     {
-      label: 'Exit VOIDKAGE',
+      label: 'Exit KAGE COMPANION',
       click: () => {
         isQuitting = true;
         app.quit();
@@ -265,6 +261,33 @@ ipcMain.handle('companion:save-position', (event, { characterId, x, y }) => {
   db.updateCharacter(characterId, { x, y });
 });
 
+// Set absolute position (ultra-fast smooth dragging)
+ipcMain.handle('companion:set-position', (event, { characterId, x, y }) => {
+  const win = windows[characterId];
+  if (win && !win.isDestroyed()) {
+    win.setPosition(Math.round(x), Math.round(y));
+    return { x: Math.round(x), y: Math.round(y) };
+  }
+  return null;
+});
+
+// Fast non-blocking position setter for smooth 60fps dragging
+ipcMain.on('companion:set-position-fast', (event, { characterId, x, y }) => {
+  const win = windows[characterId];
+  if (win && !win.isDestroyed()) {
+    win.setPosition(Math.round(x), Math.round(y));
+  }
+});
+
+// Fast non-blocking move-by delta
+ipcMain.on('companion:move-by-fast', (event, { characterId, dx, dy }) => {
+  const win = windows[characterId];
+  if (win && !win.isDestroyed()) {
+    const [currX, currY] = win.getPosition();
+    win.setPosition(currX + Math.round(dx), currY + Math.round(dy));
+  }
+});
+
 // Smooth move by delta
 ipcMain.handle('companion:move-by', (event, { characterId, dx, dy }) => {
   const win = windows[characterId];
@@ -288,7 +311,7 @@ ipcMain.handle('companion:hide', (event, characterId) => {
 
 // Open Settings
 ipcMain.handle('window:open-settings', (event, tab) => {
-  createSettingsWindow(tab || 'dashboard');
+  createSettingsWindow(tab || 'characters');
 });
 
 // Settings Handlers
@@ -381,8 +404,8 @@ ipcMain.handle('app:quit', () => {
 app.whenReady().then(initializeApp);
 
 app.on('second-instance', () => {
-  // If user launches second instance, open dashboard or show characters
-  createSettingsWindow('dashboard');
+  // If user launches second instance, open settings or show characters
+  createSettingsWindow('characters');
   Object.values(windows).forEach(win => {
     if (win && !win.isDestroyed()) {
       win.show();

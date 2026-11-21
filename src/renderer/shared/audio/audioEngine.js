@@ -1,5 +1,5 @@
 /**
- * VOIDKAGE Web Audio Synthesizer
+ * KAGE COMPANION Web Audio Synthesizer
  * Generates custom synthesized SFX in real time with zero external audio files.
  */
 

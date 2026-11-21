@@ -1,5 +1,5 @@
 /**
- * VOIDKAGE Dialogue Database
+ * KAGE COMPANION Dialogue Database
  * Rich, context-aware, original lines for KAGE and KAGE-CHAN.
  */
 

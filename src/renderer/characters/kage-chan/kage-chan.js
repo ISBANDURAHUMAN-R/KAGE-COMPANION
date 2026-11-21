@@ -1,30 +1,50 @@
 /**
- * KAGE-CHAN Companion Client Logic
+ * KAGE-CHAN Companion Client Logic — Transparent Desktop Companion
+ * 100% Reliable Dragging & Instant Mood Changing • Zero Question Popups
  */
 
+// Disable native image dragging completely
+window.addEventListener('dragstart', (e) => e.preventDefault());
+
 document.addEventListener('DOMContentLoaded', async () => {
-  const container = document.getElementById('companion-wrapper');
-  container.innerHTML = window.createKageChanSVG();
+  const mount = document.getElementById('avatar-mount') || document.getElementById('companion-wrapper');
+  mount.innerHTML = window.createKageChanSVG();
 
   const avatar = document.getElementById('kage-chan-avatar');
-  const balloon = document.getElementById('speech-balloon');
-  const balloonText = document.getElementById('speech-text');
+  const wrapper = document.getElementById('companion-wrapper');
   const menu = document.getElementById('interaction-menu');
-  const tooltip = document.getElementById('menu-tooltip');
 
   let currentState = 'idle';
-  let speechTimer = null;
   let stateResetTimer = null;
 
-  // Drag tracking
+  // Ultra-reliable delta dragging state (immune to pointercancel, no pointer capture)
   let isMouseDown = false;
   let isDragging = false;
-  let startX = 0;
-  let startY = 0;
-  let currentScreenX = 0;
-  let currentScreenY = 0;
+  let hasMoved = false;
+  let startScreenX = 0;
+  let startScreenY = 0;
 
-  // Initial config load
+  // Mood cycle list for automatic switching on click (all official expressions & actions)
+  const moodCycle = [
+    'happy',
+    'excited',
+    'blushing',
+    'teasing',
+    'curious',
+    'coffee',
+    'gaming',
+    'coding',
+    'love',
+    'angry',
+    'rage',
+    'sleepy',
+    'sleeping',
+    'sunglasses',
+    'idle'
+  ];
+  let moodIndex = 0;
+
+  // Initial config load from SQLite
   try {
     const config = await window.companionAPI.getConfig('kage-chan');
     if (config) {
@@ -43,168 +63,170 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function applyScale(scale) {
-    const s = Math.max(0.5, Math.min(2.0, parseFloat(scale) || 1.0));
-    avatar.style.transform = `scale(${s})`;
+    const s = Math.max(0.6, Math.min(1.8, parseFloat(scale) || 1.0));
+    if (avatar) avatar.style.transform = `scale(${s})`;
   }
 
   function applySettings(settings) {
     if (window.soundSynth) {
       window.soundSynth.setEnabled(settings.sound_enabled === 'true');
       window.soundSynth.setVolume(parseFloat(settings.sound_volume) || 0.7);
-      // Kage-chan slight higher pitch voice tone
-      window.soundSynth.setPitch((parseFloat(settings.voice_pitch) || 1.0) * 1.2);
+      window.soundSynth.setPitch(parseFloat(settings.voice_pitch) || 1.15); // Anime pitch
     }
   }
 
   function setMood(state, duration = null) {
     currentState = state;
-    window.setKageChanState(state, container);
+    window.setKageChanState(state);
 
     if (stateResetTimer) clearTimeout(stateResetTimer);
     if (duration && duration > 0) {
       stateResetTimer = setTimeout(() => {
-        window.setKageChanState('idle', container);
+        window.setKageChanState('idle');
         currentState = 'idle';
       }, duration);
     }
   }
 
-  function showSpeech(text, anim = 'talking', duration = 4500) {
-    if (speechTimer) clearTimeout(speechTimer);
+  // Automatic mood reaction when user clicks on KAGE-CHAN (NO POPPING QUESTIONS!)
+  async function triggerClickMoodChange() {
+    moodIndex = (moodIndex + 1) % moodCycle.length;
+    const nextMood = moodCycle[moodIndex];
 
-    if (anim) {
-      setMood(anim, duration);
-    }
+    // Immediately update sprite & emote on screen!
+    setMood(nextMood);
 
-    balloonText.textContent = '';
-    balloon.classList.add('visible');
+    // Map mood to sound interaction
+    const soundMap = {
+      happy: 'pet',
+      excited: 'play',
+      blushing: 'pet',
+      teasing: 'tease',
+      curious: 'talk',
+      coffee: 'talk',
+      gaming: 'play',
+      coding: 'talk',
+      love: 'pet',
+      angry: 'talk',
+      rage: 'talk',
+      sleepy: 'sleep',
+      sleeping: 'sleep',
+      sunglasses: 'play',
+      idle: 'talk'
+    };
 
-    // Synthesize audio chirp
+    const action = soundMap[nextMood] || 'pet';
     if (window.soundSynth) {
-      window.soundSynth.play('talk');
+      window.soundSynth.play(action);
     }
 
-    let charIdx = 0;
-    const typeInterval = setInterval(() => {
-      if (charIdx < text.length) {
-        balloonText.textContent += text.charAt(charIdx);
-        charIdx++;
-      } else {
-        clearInterval(typeInterval);
-      }
-    }, 22);
-
-    speechTimer = setTimeout(() => {
-      balloon.classList.remove('visible');
-      if (currentState === 'talking') {
-        setMood('idle');
-      }
-    }, duration);
+    // Persist interaction silently to SQLite without showing question speech balloon
+    try {
+      await window.companionAPI.interact('kage-chan', action);
+    } catch (err) {}
   }
 
-  function toggleMenu(show) {
-    if (show) {
-      menu.classList.add('open');
-      if (window.soundSynth) window.soundSynth.play('click');
-    } else {
-      menu.classList.remove('open');
-      tooltip.textContent = '';
-    }
-  }
+  // ------------------- ULTRA-SMOOTH DRAGGING & INSTANT CLICK -------------------
 
-  // ------------------- DRAG & CLICK LOGIC -------------------
+  // Drag on avatar or companion wrapper
+  const dragTarget = avatar || wrapper;
 
-  avatar.addEventListener('mousedown', (e) => {
-    if (e.button !== 0 || e.target.closest('.menu-item')) return;
+  dragTarget.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return; // Only primary button
+    if (e.target && e.target.closest && e.target.closest('.menu-item')) return;
 
     isMouseDown = true;
     isDragging = false;
-    startX = e.screenX;
-    startY = e.screenY;
-    currentScreenX = e.screenX;
-    currentScreenY = e.screenY;
+    hasMoved = false;
+    startScreenX = e.screenX;
+    startScreenY = e.screenY;
   });
 
   window.addEventListener('mousemove', (e) => {
     if (!isMouseDown) return;
 
-    const dx = e.screenX - currentScreenX;
-    const dy = e.screenY - currentScreenY;
+    // Safety: check if mouse button was released outside
+    if (e.buttons === 0) {
+      isMouseDown = false;
+      isDragging = false;
+      return;
+    }
 
-    const totalDist = Math.hypot(e.screenX - startX, e.screenY - startY);
-    if (totalDist > 5) {
+    const dx = e.screenX - startScreenX;
+    const dy = e.screenY - startScreenY;
+
+    if (!isDragging && (Math.abs(dx) > 2 || Math.abs(dy) > 2)) {
       isDragging = true;
-      toggleMenu(false);
-      currentScreenX = e.screenX;
-      currentScreenY = e.screenY;
-      window.companionAPI.moveWindow('kage-chan', dx, dy);
+      hasMoved = true;
+      if (menu) menu.classList.remove('open');
+    }
+
+    if (isDragging) {
+      window.companionAPI.moveByFast('kage-chan', dx, dy);
+      startScreenX = e.screenX;
+      startScreenY = e.screenY;
     }
   });
 
-  window.addEventListener('mouseup', async (e) => {
+  window.addEventListener('mouseup', (e) => {
     if (!isMouseDown) return;
     isMouseDown = false;
 
-    if (!isDragging && e.button === 0 && !e.target.closest('.menu-item')) {
-      if (menu.classList.contains('open')) {
-        toggleMenu(false);
-      } else {
-        toggleMenu(true);
+    if (isDragging) {
+      isDragging = false;
+      // Persist window position to SQLite
+      window.companionAPI.savePosition('kage-chan', e.screenX, e.screenY);
+    } else if (!hasMoved && e.button === 0) {
+      // Clean click detected -> Instant Mood Change without question balloons!
+      if (!e.target.closest || !e.target.closest('.menu-item')) {
+        triggerClickMoodChange();
       }
     }
-    isDragging = false;
   });
 
-  // ------------------- MENU INTERACTIONS -------------------
+  // Right-click opens Settings
+  dragTarget.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    window.companionAPI.openSettings('characters');
+  });
 
-  menu.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const tip = item.getAttribute('data-tooltip');
-      if (tip) tooltip.textContent = tip;
-    });
+  // ------------------- MENU INTERACTIONS (RADIAL MENU) -------------------
 
-    item.addEventListener('mouseleave', () => {
-      tooltip.textContent = '';
-    });
+  if (menu) {
+    menu.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const action = item.getAttribute('data-action');
+        menu.classList.remove('open');
 
-    item.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const action = item.getAttribute('data-action');
-      toggleMenu(false);
-
-      if (action === 'close') return;
-
-      if (action === 'settings') {
-        window.companionAPI.openSettings('dashboard');
-        return;
-      }
-
-      if (window.soundSynth) {
-        window.soundSynth.play(action);
-      }
-
-      try {
-        const result = await window.companionAPI.interact('kage-chan', action);
-        if (result) {
-          showSpeech(result.text, result.anim, 4500);
+        if (action === 'close') return;
+        if (action === 'settings') {
+          window.companionAPI.openSettings('characters');
+          return;
         }
-      } catch (err) {
-        console.error('Interaction error:', err);
-      }
+
+        if (window.soundSynth) window.soundSynth.play(action);
+        try {
+          const result = await window.companionAPI.interact('kage-chan', action);
+          if (result && result.anim) {
+            setMood(result.anim, 3500);
+          }
+        } catch (err) {}
+      });
     });
-  });
+  }
 
   // ------------------- IPC LISTENERS -------------------
-
-  window.companionAPI.on('companion:say', (data) => {
-    if (data && data.text) {
-      showSpeech(data.text, data.anim || 'talking', data.duration || 4500);
-    }
-  });
 
   window.companionAPI.on('companion:play-animation', (data) => {
     if (data && data.anim) {
       setMood(data.anim, data.duration || 3000);
+    }
+  });
+
+  window.companionAPI.on('companion:set-mood', (data) => {
+    if (data && data.mood) {
+      setMood(data.mood);
     }
   });
 
@@ -218,7 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.soundSynth.setVolume(data.value);
       }
       if (data.key === 'voice_pitch' && window.soundSynth) {
-        window.soundSynth.setPitch((parseFloat(data.value) || 1.0) * 1.2);
+        window.soundSynth.setPitch(data.value);
       }
     }
   });

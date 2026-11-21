@@ -1,5 +1,5 @@
 /**
- * VOIDKAGE Welcome Screen Controller
+ * KAGE COMPANION Welcome Screen Controller
  */
 
 document.addEventListener('DOMContentLoaded', () => {
