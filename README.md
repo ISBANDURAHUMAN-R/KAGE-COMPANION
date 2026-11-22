@@ -1,11 +1,12 @@
 # ◈ KAGE COMPANION — Desktop Companions
-<img width="363" height="342" alt="image" src="https://github.com/user-attachments/assets/8502c9b3-074f-4295-b71b-4b7f4d034725" />
-<img width="334" height="321" alt="image" src="https://github.com/user-attachments/assets/bb513c5b-a462-4504-8c24-0bcd5fb97dd1" />
-<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/d5d4f959-0d77-4ce9-af87-fdc82760ebf1" />
+
+
 
 
 <p align="center">
+  <img width="363" height="342" alt="image" src="https://github.com/user-attachments/assets/8502c9b3-074f-4295-b71b-4b7f4d034725" />
   <img src="https://github.com/user-attachments/assets/d5d4f959-0d77-4ce9-af87-fdc82760ebf1" alt="KAGE Companion Icon" width="120">
+  <img width="334" height="321" alt="image" src="https://github.com/user-attachments/assets/bb513c5b-a462-4504-8c24-0bcd5fb97dd1" />
 </p>
 
 <p align="center">
