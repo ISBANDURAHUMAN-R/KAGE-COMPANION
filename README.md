@@ -1,9 +1,7 @@
 # KAGE COMPANION — Desktop Companions
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4dbadd21-fbf6-4660-b946-e42f09a78440" alt="KAGE-CHAN" width="32%">
-  <img src="https://github.com/user-attachments/assets/1b05adfe-d6e5-48b0-8019-38462aac83e5" alt="KAGE COMPANION Logo" width="32%">
-  <img src="https://github.com/user-attachments/assets/bb513c5b-a462-4504-8c24-0bcd5fb97dd1" alt="KAGE" width="32%">
+  <img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/ca54ed4e-4a36-483d-aa2f-6e7ae0150ffd" />
 </p>
 
 <p align="center">
