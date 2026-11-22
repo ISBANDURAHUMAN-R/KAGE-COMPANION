@@ -38,7 +38,7 @@ Both companions stay above ordinary desktop applications, respond to mouse inter
 
 ```mermaid
 flowchart TD
-    A(["USER INPUT<br/>Mouse Interactions & Desktop Controls"])
+    A(["USER INPUT<br/>Mouse Interactions &amp;<br/>Desktop Controls"])
 
     subgraph Main["ELECTRON MAIN PROCESS"]
         B["Application Controller"]
@@ -51,9 +51,9 @@ flowchart TD
     subgraph Companions["DESKTOP COMPANION ENGINE"]
         E["KAGE Character"]
         F["KAGE-CHAN Character"]
-        G["Personality & Mood Engine"]
-        H["Autonomous Behavior Engine"]
-        I["Relationship & Dialogue Engine"]
+        G["Personality &amp;<br/>Mood Engine"]
+        H["Autonomous Behavior<br/>Engine"]
+        I["Relationship &amp;<br/>Dialogue Engine"]
 
         E --> G
         F --> G
@@ -62,21 +62,21 @@ flowchart TD
     end
 
     subgraph Interface["USER INTERFACE"]
-        J["Transparent Companion Windows"]
+        J["Transparent Companion<br/>Windows"]
         K["Settings Dashboard"]
-        L["System Tray & Quick Actions"]
+        L["System Tray &amp;<br/>Quick Actions"]
     end
 
     subgraph Audio["AUDIO ENGINE"]
         M["Web Audio API"]
-        N["Procedural Sound Synthesis"]
+        N["Procedural Sound<br/>Synthesis"]
         M --> N
     end
 
     subgraph Storage["LOCAL PERSISTENCE"]
         O["SQLite Database"]
-        P["Saved Positions & Settings"]
-        Q["Character States & Preferences"]
+        P["Saved Positions &amp;<br/>Settings"]
+        Q["Character States &amp;<br/>Preferences"]
         O --> P
         O --> Q
     end
