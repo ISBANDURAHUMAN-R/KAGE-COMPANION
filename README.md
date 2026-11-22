@@ -203,43 +203,6 @@ The application includes five settings tabs:
 3. Follow the installation instructions.
 4. Select **Launch KAGE COMPANION** to start the application.
 
-## Developer Setup
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/isbandu/kage-companion.git
-cd kage-companion
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Start the Application
-
-```bash
-npm start
-```
-
-### 4. Run Tests
-
-```bash
-npm test
-```
-
-### 5. Build Windows Packages
-
-```bash
-npm run dist
-```
-
-Build artifacts are generated inside the `dist/` directory:
-
-- `dist/KAGE-COMPANION-Setup-1.0.0.exe` — Windows installer.
-- `dist/KAGE-COMPANION-Portable-x64.zip` — Portable package.
 
 ## Project Structure
 
