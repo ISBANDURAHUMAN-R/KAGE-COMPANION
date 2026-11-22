@@ -8,10 +8,9 @@
     src="https://github.com/user-attachments/assets/8502c9b3-074f-4295-b71b-4b7f4d034725"
     alt="KAGE Companion"
     width="220"
-    height="220"
-  />
-  <img
-    src="https://github.com/user-attachments/assets/d5d4f959-0d77-4ce9-af87-fdc82760ebf1"
+    height="220" /> 
+  <img 
+    src="https://github.com/user-attachments/assets/1b05adfe-d6e5-48b0-8019-38462aac83e5"
     alt="KAGE Companion Icon"
     width="220"
     height="220"
