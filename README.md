@@ -278,10 +278,6 @@ Character settings, saved positions, and other supported application data are st
 
 **Created, Developed & Owned by: ISBANDU RAHUMAN R**
 
-- Founder & Creator: Isbandu Rahuman R.
-- Application Developer: Isbandu Rahuman R.
-- Concept & Product Design: Isbandu Rahuman R.
-- Project Owner: Isbandu Rahuman R.
 
 GitHub: [ISBANDURAHUMAN-R](https://github.com/ISBANDURAHUMAN-R)
 
