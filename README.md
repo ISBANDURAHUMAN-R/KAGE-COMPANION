@@ -1,4 +1,7 @@
 # ◈ KAGE COMPANION — Desktop Companions
+<img width="363" height="342" alt="image" src="https://github.com/user-attachments/assets/8502c9b3-074f-4295-b71b-4b7f4d034725" />
+<img width="334" height="321" alt="image" src="https://github.com/user-attachments/assets/bb513c5b-a462-4504-8c24-0bcd5fb97dd1" />
+
 
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-ff1a2b.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-white.svg)](LICENSE)
@@ -7,40 +10,40 @@
 [![Privacy](https://img.shields.io/badge/Privacy-Offline-success.svg)](#)
 
 <p align="center">
-  <img src="src/renderer/assets/icons/icon-64.png" alt="KAGE Companion Banner" width="120">
+  <img src="src/renderer/assets/icons/icon-64.png" alt="KAGE Companion Icon" width="120">
 </p>
 
 <p align="center">
   <strong>KAGE & KAGE-CHAN</strong><br>
-  Interactive Desktop Companions for Windows 10 & Windows 11
+  Interactive Desktop Companions for Windows 10 and Windows 11
 </p>
 
 <p align="center">
-  Black × Blood Red × White | 100% Offline | Zero Configuration Required
+  Black × Blood Red × White | Offline | Zero Configuration
 </p>
 
 ---
 
-## ◆ About the Project
+## About the Project
 
-KAGE COMPANION is an independently developed desktop companion application that brings two interactive chibi characters directly onto the Windows desktop.
+KAGE COMPANION is an independently developed desktop application that brings two interactive chibi characters directly onto your Windows desktop.
 
-Built with Electron, JavaScript, and embedded SQLite storage, it provides transparent always-on-top companion windows, expressive character states, autonomous animations, interactive controls, and persistent desktop positioning.
+Built with Electron, JavaScript, and embedded SQLite, the application features transparent companion windows, expressive character states, autonomous animations, interactive controls, and persistent desktop positioning.
 
-The application features two independent companions:
+### Meet the Companions
 
 - **KAGE — The Shadow Pet:** A mischievous shadow creature with glowing blood-red eyes, small horns, and a swishing tail. Curious, playful, lazy, and expressive.
 - **KAGE-CHAN — The Chibi Companion:** An anime-inspired companion with long dark hair, crimson highlights, and gothic attire. Caring, supportive, teasing, and slightly tsundere.
 
-Both companions float above ordinary desktop applications, respond to mouse interactions, cycle through expressive poses, and quietly accompany everyday desktop activities.
+Both companions stay above ordinary desktop applications, respond to mouse interactions, and accompany your everyday desktop activities.
 
-## ◆ System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
     A(["USER INPUT<br/>Mouse Interactions & Desktop Controls"])
 
-    subgraph Main ["ELECTRON MAIN PROCESS"]
+    subgraph Main["ELECTRON MAIN PROCESS"]
         B["Application Controller"]
         C["Window Manager"]
         D["IPC Communication"]
@@ -48,7 +51,7 @@ flowchart TD
         B --> D
     end
 
-    subgraph Companions ["DESKTOP COMPANION ENGINE"]
+    subgraph Companions["DESKTOP COMPANION ENGINE"]
         E["KAGE Character"]
         F["KAGE-CHAN Character"]
         G["Personality & Mood Engine"]
@@ -61,19 +64,19 @@ flowchart TD
         G --> I
     end
 
-    subgraph Interface ["USER INTERFACE"]
+    subgraph Interface["USER INTERFACE"]
         J["Transparent Companion Windows"]
-        K["Five-Tab Settings Dashboard"]
+        K["Settings Dashboard"]
         L["System Tray & Quick Actions"]
     end
 
-    subgraph Audio ["AUDIO ENGINE"]
+    subgraph Audio["AUDIO ENGINE"]
         M["Web Audio API"]
         N["Procedural Sound Synthesis"]
         M --> N
     end
 
-    subgraph Storage ["LOCAL PERSISTENCE"]
+    subgraph Storage["LOCAL PERSISTENCE"]
         O["SQLite Database"]
         P["Saved Positions & Settings"]
         Q["Character States & Preferences"]
@@ -81,7 +84,7 @@ flowchart TD
         O --> Q
     end
 
-    R(["OUTPUT<br/>Animated Companions<br/>Expressive States<br/>Interactive Actions<br/>Persistent Desktop Experience"])
+    R(["OUTPUT<br/>Animated Companions<br/>Expressive States<br/>Interactive Actions"])
 
     A --> B
     C --> J
@@ -100,48 +103,58 @@ flowchart TD
     Q --> R
 ```
 
-## ❖ Key Features
+## Key Features
 
-- **Interactive Desktop Companions**
-  - Transparent, frameless companion windows.
-  - Always-on-top desktop positioning.
-  - Smooth drag-and-drop movement.
-  - Independent character visibility controls.
-  - Persistent desktop coordinates.
-  - Adjustable companion scaling from 60% to 180%.
+### Interactive Desktop Companions
 
-- **Expressive Character System**
-  - 15+ character poses and expressions.
-  - Idle, Happy, Sad, Curious, Angry, Sleepy, Surprised, Excited, Walking, Sleeping, Gaming, Coding, Coffee, Music, and Love states.
-  - Interactive radial menus with Pet, Play, Sleep, Settings, and Close actions.
-  - Autonomous idle animations.
-  - Silent companion experience without intrusive notifications or unwanted chatter.
+- Transparent and frameless companion windows.
+- Always-on-top desktop positioning.
+- Smooth drag-and-drop movement.
+- Independent character visibility controls.
+- Persistent companion positions.
+- Adjustable scaling from 60% to 180%.
 
-- **Five-Tab Settings Dashboard**
-  - **Companions:** Character previews, individual visibility controls, scaling, and position reset.
-  - **Behavior:** Animation intervals, responsiveness, and silent desktop mode.
-  - **Audio:** Procedural audio controls, master volume, and pitch adjustments.
-  - **Startup & Privacy:** Windows startup configuration, local database information, data folder access, and memory reset.
-  - **About:** Application version, companion identities, hotkeys, and license information.
+### Character System
 
-- **Procedural Audio Engine**
-  - Real-time Web Audio synthesis.
-  - Gentle blips, warm purrs, cheerful chimes, and lullabies.
-  - Adjustable master volume and pitch.
-  - No external audio files required for procedural sounds.
+- 15+ character poses and expressions.
+- Multiple states, including Happy, Sad, Curious, Angry, Sleepy, Surprised, Excited, Walking, Sleeping, Gaming, Coding, Coffee, Music, and Love.
+- Interactive radial menus with Pet, Play, Sleep, Settings, and Close actions.
+- Autonomous idle animations.
+- Silent companion experience without intrusive notifications or unwanted chatter.
 
-- **Local-First Privacy**
-  - Embedded SQLite database.
-  - Local application data storage.
-  - Designed for fully offline operation.
-  - No telemetry or tracking.
+### Settings Dashboard
 
-- **Windows Startup Integration**
-  - Optional automatic Windows startup.
-  - Background execution.
-  - Restores previously saved companion positions.
+The application includes five settings tabs:
 
-## ◆ Mouse & Desktop Controls
+| Tab | Description |
+|---|---|
+| Companions | Character previews, visibility, scaling, and position reset |
+| Behavior | Animation intervals, responsiveness, and silent mode |
+| Audio | Master volume, procedural audio, and pitch controls |
+| Startup & Privacy | Windows startup, database information, data folder, and memory reset |
+| About | Application version, companion information, hotkeys, and license |
+
+### Procedural Audio
+
+- Real-time sound synthesis using the Web Audio API.
+- Gentle blips, warm purrs, cheerful chimes, and lullabies.
+- Adjustable master volume and pitch.
+- Procedural sounds without requiring external audio files.
+
+### Local-First Privacy
+
+- Embedded SQLite database.
+- Local application data storage.
+- Designed for offline operation.
+- No telemetry or tracking.
+
+### Windows Integration
+
+- Optional automatic Windows startup.
+- Background execution.
+- Restores previously saved companion positions.
+
+## Mouse & Desktop Controls
 
 | Action | Control | Result |
 |---|---|---|
@@ -152,37 +165,37 @@ flowchart TD
 | Open Settings | Double-click tray icon | Opens settings dashboard |
 | Reset Positions | Tray menu → Reset Positions | Restores default positions |
 
-## ⬢ Technologies Used
+## Technologies Used
 
 - Electron 33.2
 - JavaScript
 - Node.js
-- HTML5 & CSS3
+- HTML5 and CSS3
 - SQLite / SQLite WebAssembly
 - Web Audio API
-- IPC Communication
+- Electron IPC
 - npm
 
-## § Requirements
+## Requirements
 
 **For End Users**
 - Windows 10 or Windows 11 (64-bit).
-- No Node.js, Python, or development tools required for packaged releases.
+- No development tools required for packaged releases.
 
 **For Developers**
 - Node.js 18 or higher.
 - npm 9 or higher.
 - Windows 10 or Windows 11 (64-bit).
 
-## ▲ Installation & Execution
+## Installation & Execution
 
 ### Option A: Portable Version
 
 1. Download `KAGE-COMPANION-Portable-x64.zip`.
-2. Extract the ZIP archive.
+2. Extract the archive.
 3. Open the extracted directory.
-4. Double-click `KAGE COMPANION.exe`.
-5. Both desktop companions will appear.
+4. Run `KAGE COMPANION.exe`.
+5. The desktop companions will appear.
 
 ### Option B: Windows Installer
 
@@ -191,9 +204,9 @@ flowchart TD
 3. Follow the installation instructions.
 4. Select **Launch KAGE COMPANION** to start the application.
 
-## ◆ Developer Setup
+## Developer Setup
 
-### 1. Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/isbandu/kage-companion.git
@@ -206,13 +219,13 @@ cd kage-companion
 npm install
 ```
 
-### 3. Run Development Version
+### 3. Start the Application
 
 ```bash
 npm start
 ```
 
-### 4. Run Automated Tests
+### 4. Run Tests
 
 ```bash
 npm test
@@ -226,10 +239,10 @@ npm run dist
 
 Build artifacts are generated inside the `dist/` directory:
 
-- `dist/KAGE-COMPANION-Setup-1.0.0.exe` — NSIS Windows Installer.
-- `dist/KAGE-COMPANION-Portable-x64.zip` — Portable ZIP Package.
+- `dist/KAGE-COMPANION-Setup-1.0.0.exe` — Windows installer.
+- `dist/KAGE-COMPANION-Portable-x64.zip` — Portable package.
 
-## ◈ Architecture & Project Structure
+## Project Structure
 
 ```text
 src/
@@ -262,9 +275,9 @@ src/
         └── styles/
 ```
 
-## ※ Privacy & Data Storage
+## Privacy & Data Storage
 
-KAGE COMPANION follows a local-first storage approach.
+KAGE COMPANION uses local storage to maintain supported application data.
 
 **Database Location:**
 
@@ -272,18 +285,17 @@ KAGE COMPANION follows a local-first storage approach.
 %APPDATA%\kage-companion\kage.sqlite
 ```
 
-Character settings, saved positions, and other supported application data are stored locally. The application is designed to function without internet connectivity.
+Character settings, saved positions, and other supported application data are stored locally. The application is designed to function without an internet connection.
 
-## ※ Developer
+## Developer
 
-**Created, Developed & Owned by: ISBANDU RAHUMAN R**
-
+**Created, Developed & Owned by Isbandu Rahuman R**
 
 GitHub: [ISBANDURAHUMAN-R](https://github.com/ISBANDURAHUMAN-R)
 
 KAGE COMPANION is an independently developed personal desktop companion application.
 
-## § License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
 
