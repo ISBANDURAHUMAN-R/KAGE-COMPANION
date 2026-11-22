@@ -3,12 +3,6 @@
 <img width="334" height="321" alt="image" src="https://github.com/user-attachments/assets/bb513c5b-a462-4504-8c24-0bcd5fb97dd1" />
 
 
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-ff1a2b.svg)](#)
-[![License](https://img.shields.io/badge/License-MIT-white.svg)](LICENSE)
-[![Electron](https://img.shields.io/badge/Electron-33.2-black.svg)](#)
-[![Database](https://img.shields.io/badge/Database-Embedded%20SQLite-red.svg)](#)
-[![Privacy](https://img.shields.io/badge/Privacy-Offline-success.svg)](#)
-
 <p align="center">
   <img src="src/renderer/assets/icons/icon-64.png" alt="KAGE Companion Icon" width="120">
 </p>
@@ -16,11 +10,15 @@
 <p align="center">
   <strong>KAGE & KAGE-CHAN</strong><br>
   Interactive Desktop Companions for Windows 10 and Windows 11
+  [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-ff1a2b.svg)](#)
+[![License](https://img.shields.io/badge/License-MIT-white.svg)](LICENSE)
+[![Electron](https://img.shields.io/badge/Electron-33.2-black.svg)](#)
+[![Database](https://img.shields.io/badge/Database-Embedded%20SQLite-red.svg)](#)
+[![Privacy](https://img.shields.io/badge/Privacy-Offline-success.svg)](#)
 </p>
 
-<p align="center">
-  Black × Blood Red × White | Offline | Zero Configuration
-</p>
+
+
 
 ---
 
