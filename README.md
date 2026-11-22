@@ -38,22 +38,22 @@ Both companions stay above ordinary desktop applications, respond to mouse inter
 
 ```mermaid
 flowchart TD
-    A(["USER INPUT<br/>Mouse Interactions &amp;<br/>Desktop Controls"])
+    A(["&nbsp;&nbsp;&nbsp; USER INPUT &nbsp;&nbsp;&nbsp;<br/>&nbsp; Mouse Interactions &nbsp;<br/>&nbsp; &amp; Desktop Controls &nbsp;"])
 
-    subgraph Main["ELECTRON MAIN PROCESS"]
-        B["Application Controller"]
-        C["Window Manager"]
-        D["IPC Communication"]
+    subgraph Main ["&nbsp; ELECTRON MAIN PROCESS &nbsp;"]
+        B["&nbsp; Application &nbsp;<br/>&nbsp; Controller &nbsp;"]
+        C["&nbsp; Window &nbsp;<br/>&nbsp; Manager &nbsp;"]
+        D["&nbsp; IPC &nbsp;<br/>&nbsp; Communication &nbsp;"]
         B --> C
         B --> D
     end
 
-    subgraph Companions["DESKTOP COMPANION ENGINE"]
-        E["KAGE Character"]
-        F["KAGE-CHAN Character"]
-        G["Personality &amp;<br/>Mood Engine"]
-        H["Autonomous Behavior<br/>Engine"]
-        I["Relationship &amp;<br/>Dialogue Engine"]
+    subgraph Companions ["&nbsp; DESKTOP COMPANION ENGINE &nbsp;"]
+        E["&nbsp; KAGE &nbsp;<br/>&nbsp; Character &nbsp;"]
+        F["&nbsp; KAGE-CHAN &nbsp;<br/>&nbsp; Character &nbsp;"]
+        G["&nbsp; Personality &amp; &nbsp;<br/>&nbsp; Mood Engine &nbsp;"]
+        H["&nbsp; Autonomous &nbsp;<br/>&nbsp; Behavior Engine &nbsp;"]
+        I["&nbsp; Relationship &amp; &nbsp;<br/>&nbsp; Dialogue Engine &nbsp;"]
 
         E --> G
         F --> G
@@ -61,27 +61,27 @@ flowchart TD
         G --> I
     end
 
-    subgraph Interface["USER INTERFACE"]
-        J["Transparent Companion<br/>Windows"]
-        K["Settings Dashboard"]
-        L["System Tray &amp;<br/>Quick Actions"]
+    subgraph Interface ["&nbsp; USER INTERFACE &nbsp;"]
+        J["&nbsp; Transparent &nbsp;<br/>&nbsp; Companion Windows &nbsp;"]
+        K["&nbsp; Settings &nbsp;<br/>&nbsp; Dashboard &nbsp;"]
+        L["&nbsp; System Tray &amp; &nbsp;<br/>&nbsp; Quick Actions &nbsp;"]
     end
 
-    subgraph Audio["AUDIO ENGINE"]
-        M["Web Audio API"]
-        N["Procedural Sound<br/>Synthesis"]
+    subgraph Audio ["&nbsp; AUDIO ENGINE &nbsp;"]
+        M["&nbsp; Web Audio API &nbsp;"]
+        N["&nbsp; Procedural &nbsp;<br/>&nbsp; Sound Synthesis &nbsp;"]
         M --> N
     end
 
-    subgraph Storage["LOCAL PERSISTENCE"]
-        O["SQLite Database"]
-        P["Saved Positions &amp;<br/>Settings"]
-        Q["Character States &amp;<br/>Preferences"]
+    subgraph Storage ["&nbsp; LOCAL PERSISTENCE &nbsp;"]
+        O["&nbsp; SQLite Database &nbsp;"]
+        P["&nbsp; Saved Positions &nbsp;<br/>&nbsp; &amp; Settings &nbsp;"]
+        Q["&nbsp; Character States &nbsp;<br/>&nbsp; &amp; Preferences &nbsp;"]
         O --> P
         O --> Q
     end
 
-    R(["OUTPUT<br/>Animated Companions<br/>Expressive States<br/>Interactive Actions"])
+    R(["&nbsp;&nbsp;&nbsp; OUTPUT &nbsp;&nbsp;&nbsp;<br/>&nbsp; Animated Companions &nbsp;<br/>&nbsp; Expressive States &nbsp;<br/>&nbsp; Interactive Actions &nbsp;"])
 
     A --> B
     C --> J

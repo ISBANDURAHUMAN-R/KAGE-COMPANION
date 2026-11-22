@@ -1,6 +1,6 @@
-# VOIDKAGE Changelog
+# KAGE COMPANION Changelog
 
-All notable changes to the VOIDKAGE Desktop Companions project will be documented in this file.
+All notable changes to the KAGE COMPANION Desktop Companions project will be documented in this file.
 
 ## [1.0.0] - 2026-11-18
 
@@ -19,17 +19,17 @@ All notable changes to the VOIDKAGE Desktop Companions project will be documente
 - **Personality & Memory Engine**:
   - Contextual dialogue system based on mood, time of day, and interaction history.
   - Non-repetitive dialogue selection with cooldown tracking.
-  - Local SQLite 3 embedded database (`voidkage.sqlite`) storing settings, character positions, affection, and interaction history.
+  - Local SQLite 3 embedded database (`kage.sqlite`) storing settings, character positions, affection, and interaction history.
 - **Autonomous Behaviors**:
   - Four operating modes: Quiet, Focus, Normal, and Active.
   - Cross-character interactions (Kage and Kage-Chan banter and play together on the user's desktop).
 - **Dashboard & Control Center**:
-  - 10 comprehensive configuration tabs in VOIDKAGE black & blood-red theme.
+  - 5 streamlined configuration tabs in KAGE COMPANION black & blood-red theme.
   - Real-time mood telemetry, affection meters, energy gauges, and interaction logs.
 - **Audio Synthesizer**:
   - Built-in Web Audio API sound synthesizer producing procedural 8-bit / cyber blips, purrs, chimes, and lullabies with zero external dependencies.
 - **Windows Startup**:
   - Automatic launch integration via Windows Startup item registration (`app.setLoginItemSettings`).
 - **Distribution**:
-  - Single-click Windows installer (`VOIDKAGE-Setup-1.0.0.exe`).
-  - Standalone zero-dependency portable ZIP package (`VOIDKAGE-Portable-x64.zip`).
+  - Single-click Windows installer (`KAGE-COMPANION-Setup-1.0.0.exe`).
+  - Standalone zero-dependency portable ZIP package (`KAGE-COMPANION-Portable-x64.zip`).

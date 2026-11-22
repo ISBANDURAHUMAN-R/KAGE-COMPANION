@@ -57,4 +57,4 @@ tray_icon = square_canvas.resize((32, 32), Image.Resampling.LANCZOS)
 tray_icon.save(os.path.join(dest_dir, "tray-icon.png"), "PNG")
 tray_icon.save(os.path.join(dest_dir, "tray-icon.ico"), format="ICO", sizes=[(32, 32), (16, 16)])
 
-print("White-background official VOIDKAGE icons generated successfully!")
+print("White-background official KAGE COMPANION icons generated successfully!")

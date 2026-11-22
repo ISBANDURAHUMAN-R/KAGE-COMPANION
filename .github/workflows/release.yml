@@ -1,4 +1,4 @@
-name: VOIDKAGE Release Build
+name: KAGE COMPANION Release Build
 
 on:
   push:
@@ -37,13 +37,13 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          name: "VOIDKAGE v${{ github.ref_name }}"
+          name: "KAGE COMPANION v${{ github.ref_name }}"
           draft: false
           prerelease: false
           body_path: CHANGELOG.md
           files: |
-            dist/VOIDKAGE-Setup-*.exe
-            dist/VOIDKAGE-*.zip
+            dist/KAGE-COMPANION-Setup-*.exe
+            dist/KAGE-COMPANION-*.zip
             README.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

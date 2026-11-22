@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-function createVoidkagePng(width, height) {
+function createKagePng(width, height) {
   const rgba = Buffer.alloc(width * height * 4);
   const cx = width / 2;
   const cy = height / 2;
@@ -156,9 +156,9 @@ function createMultiIco(images) {
 const iconsDir = path.join(__dirname, '../src/renderer/assets/icons');
 fs.mkdirSync(iconsDir, { recursive: true });
 
-const png32 = createVoidkagePng(32, 32);
-const png64 = createVoidkagePng(64, 64);
-const png256 = createVoidkagePng(256, 256);
+const png32 = createKagePng(32, 32);
+const png64 = createKagePng(64, 64);
+const png256 = createKagePng(256, 256);
 
 fs.writeFileSync(path.join(iconsDir, 'tray-icon.png'), png32);
 fs.writeFileSync(path.join(iconsDir, 'icon-64.png'), png64);
@@ -172,4 +172,4 @@ const multiIco = createMultiIco([
 
 fs.writeFileSync(path.join(iconsDir, 'icon.ico'), multiIco);
 
-console.log('Successfully generated multi-resolution VOIDKAGE icon.ico (256x256, 64x64, 32x32)');
+console.log('Successfully generated multi-resolution KAGE COMPANION icon.ico (256x256, 64x64, 32x32)');
