@@ -17,6 +17,12 @@
   <a href="#"><img src="https://img.shields.io/badge/Privacy-Offline-success.svg" alt="Privacy"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/ISBANDURAHUMAN-R/KAGE-COMPANION/releases/download/v1.0.0/KAGE-COMPANION-Setup-1.0.0.exe"><img src="https://img.shields.io/badge/Download-Windows%20Installer%20(.exe)-ff1a2b?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Installer"></a>
+  <a href="https://github.com/ISBANDURAHUMAN-R/KAGE-COMPANION/releases/download/v1.0.0/KAGE-COMPANION-Portable-x64.zip"><img src="https://img.shields.io/badge/Download-Portable%20(.zip)-222222?style=for-the-badge&logo=windows&logoColor=white" alt="Download Portable ZIP"></a>
+  <a href="https://github.com/ISBANDURAHUMAN-R/KAGE-COMPANION/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/Release-v1.0.0-bloodred?style=for-the-badge" alt="Release v1.0.0"></a>
+</p>
+
 
 
 ---
@@ -188,7 +194,7 @@ The application includes five settings tabs:
 
 ### Option A: Portable Version
 
-1. Download `KAGE-COMPANION-Portable-x64.zip`.
+1. Download [**KAGE-COMPANION-Portable-x64.zip**](https://github.com/ISBANDURAHUMAN-R/KAGE-COMPANION/releases/download/v1.0.0/KAGE-COMPANION-Portable-x64.zip).
 2. Extract the archive.
 3. Open the extracted directory.
 4. Run `KAGE COMPANION.exe`.
@@ -196,7 +202,7 @@ The application includes five settings tabs:
 
 ### Option B: Windows Installer
 
-1. Download `KAGE-COMPANION-Setup-1.0.0.exe`.
+1. Download [**KAGE-COMPANION-Setup-1.0.0.exe**](https://github.com/ISBANDURAHUMAN-R/KAGE-COMPANION/releases/download/v1.0.0/KAGE-COMPANION-Setup-1.0.0.exe).
 2. Run the installer.
 3. Follow the installation instructions.
 4. Select **Launch KAGE COMPANION** to start the application.
